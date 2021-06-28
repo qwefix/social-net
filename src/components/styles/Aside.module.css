@@ -1,0 +1,27 @@
+.aside{
+    grid-area: a;
+    background-color: grey;
+    padding: .5rem;
+    color:white;
+    border-radius: .5remx;
+    font-size: 2rem;
+}
+.list{
+    list-style-type: none;
+    padding: 0;
+}
+.list li{
+    cursor: pointer;
+    text-align: center;
+    background-color: rgb(88, 88, 88);
+    border-radius: .2rem;
+    padding: 0.3rem;
+    margin-bottom: 0.2rem;
+}
+.list li:hover{
+    color: black;
+    background-color: white;
+}
+.list li:last-child{
+    margin-top:3rem;
+}

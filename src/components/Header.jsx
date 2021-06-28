@@ -1,10 +1,11 @@
 import React from 'react';
-import logoIcon from './../header-icon.svg';
+import classes from './styles/Header.module.css'
+import logoIcon from './assets/header-icon.svg';
 
 function Header() {
     return (
-        <header>
-            <img src={logoIcon} width='40' alt='logo' />
+        <header className={classes.header}>
+            <img src={logoIcon} alt='logo' className={classes.image}/>
             <p>Header</p>
             <p>Inform</p>
         </header>

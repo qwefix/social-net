@@ -1,0 +1,13 @@
+.header{
+    grid-area: h;
+    display: flex;
+    justify-content: space-between;
+    background-color: grey;
+    padding: .5rem;
+    color:white;
+    border-radius: .5rem;
+    font-size: 4rem;
+}
+.image {
+    width: 5rem;
+}

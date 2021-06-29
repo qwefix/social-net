@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './styles/Aside.module.css';
+import c from './Aside.module.css';
 
 const Aside = () => {
     return (
-        <aside  className = {styles.aside} >
-            <ul className={styles.list}>
+        <aside  className = {c.aside} >
+            <ul className={c.list}>
                 <li>Profile</li>
                 <li>Messages</li>
                 <li>News</li>

@@ -1,3 +1,23 @@
 .post{
-    color:yellow
+    color:yellow;
+    display: flex;    
+}
+.ava{
+    overflow:hidden;
+    width: 7rem;
+    height: 7rem;
+    border-radius: .3rem;
+    display: flex;
+    background-color: azure;
+    border: .1rem solid black;
+    border-radius: 50%;
+    align-items: stretch;
+    justify-content: center;
+}
+.content{
+    padding: .5rem;
+    flex-grow: 1;
+}
+.user_name{
+    font-size: 1.5rem;
 }

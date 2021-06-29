@@ -1,5 +1,4 @@
 .wallpaper_box{
-    position: relative;
     overflow:hidden;
     width: 100%;
     height: 25rem;
@@ -10,6 +9,28 @@
 .wallpaper{
     width: 100%;    
 }
+.ava_description{
+    border-radius: .3rem;
+    margin-top: 1rem;
+    display: flex;
+    background-color: cornsilk;
+}
 .ava{
-    font-size: 2rem;
+    overflow:hidden;
+    width: 15rem;
+    height: 15rem;
+    border-radius: .3rem;
+    display: flex;
+    background-color: azure;
+    border: .1rem solid black;
+    border-radius: .5rem;
+    align-items: stretch;
+    justify-content: center;
+}
+.description{
+    flex-grow: 1;
+    text-align: center;
+    font-size: 3rem;
+    padding: 0;
+    line-height: 3rem;
 }

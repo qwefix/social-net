@@ -1,8 +1,12 @@
 .post{
-    color:yellow;
-    display: flex;    
+    color: black;
+    background-color: rgb(211, 211, 211);;
+    display: flex;
+    margin-top: 1rem;
+    position: relative;
 }
 .ava{
+    min-width: 7rem;
     overflow:hidden;
     width: 7rem;
     height: 7rem;
@@ -16,8 +20,35 @@
 }
 .content{
     padding: .5rem;
+    padding-right: 5rem;
     flex-grow: 1;
 }
 .user_name{
     font-size: 1.5rem;
+}
+.like_box{
+    position: absolute;
+    background-color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    transition: .15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 1rem;
+    right: 1rem;
+}
+.like_box img{
+    width: 2rem;
+    height: 2rem;
+}
+.like_box:hover{
+    transform: scale(1.6);
+}
+.like_box:hover img{
+    transform: scale(1.2);
+}
+.active{
+    background-color: pink;
 }

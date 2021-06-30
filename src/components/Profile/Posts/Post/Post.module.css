@@ -26,8 +26,17 @@
 .user_name{
     font-size: 1.5rem;
 }
-.like_box{
+.like_wrapper{
     position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+}
+.likes{
+    margin-right: 1rem;
+}
+.like_button{   
     background-color: white;
     width: 3rem;
     height: 3rem;
@@ -36,17 +45,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 1rem;
-    right: 1rem;
 }
-.like_box img{
+.like_button img{
     width: 2rem;
     height: 2rem;
 }
-.like_box:hover{
+.like_button:hover{
     transform: scale(1.6);
 }
-.like_box:hover img{
+.like_button:hover img{
     transform: scale(1.2);
 }
 .active{

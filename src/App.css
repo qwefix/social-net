@@ -1,6 +1,9 @@
 *{
     cursor: default;
 }
+body{
+    overflow-y: scroll;
+}
 p{
     margin: 0;
 }
@@ -16,6 +19,7 @@ p{
         'a m'
     ;
     grid-gap: 5px;
+    min-height: 90vh;
 }
 .app>.main{
     background-color: rgb(192, 192, 192);

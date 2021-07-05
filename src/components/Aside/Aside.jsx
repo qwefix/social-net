@@ -1,16 +1,17 @@
 import React from 'react';
 import c from './Aside.module.css';
+import { NavLink } from 'react-router-dom';
 
 const Aside = () => {
-    return (
-        <aside  className = {c.aside} >
-            <ul className={c.list}>
-                <li><a href='/profile'>Profile</a></li>
-                <li><a href='/dialogs'>Messages</a></li>
-                <li><a href='/news'>News</a></li>
-                <li><a href='/music'>Music</a></li>
-                <li><a href='/settings'>Settings</a></li>
-            </ul>
+    return (         
+        <aside className={c.aside} >
+            <div className={c.list}>
+                <NavLink to='/profile' activeClassName={c.active}>Profile</NavLink>
+                <NavLink to='/dialogs' activeClassName={c.active}>Messages</NavLink>
+                <NavLink to='/news' activeClassName={c.active}>News</NavLink>
+                <NavLink to='/music' activeClassName={c.active}>Music</NavLink>
+                <NavLink to='/settings' activeClassName={c.active}>Settings</NavLink>
+            </div>
         </aside>)
 }
 

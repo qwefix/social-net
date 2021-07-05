@@ -18,10 +18,22 @@
     padding: 0.3rem;
     margin-bottom: 0.2rem;
 }
-.list li:hover{
+.list li:hover {
     color: black;
     background-color: white;
 }
 .list li:last-child{
     margin-top:3rem;
+}
+.list li a{
+    cursor: pointer;    
+    text-decoration: none;
+    color: white;
+}
+.list li:hover a{
+    color: black;
+    background-color: white;
+}
+.list li a:active{
+    color: black ;
 }

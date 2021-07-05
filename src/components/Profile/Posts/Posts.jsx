@@ -6,7 +6,7 @@ const Posts = () => {
     return (
         <div className={c.posts}>
             <Post text='hello' likes={1} />
-            <Post text='text texttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttext'/>
+            <Post text='text texttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttext'/>
             <Post/> 
         </div>
     )

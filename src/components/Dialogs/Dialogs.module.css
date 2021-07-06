@@ -1,4 +1,8 @@
 .dialogs_wrapper{
     display: grid;
     grid-template-columns: 1fr 2fr;
+    grid-gap: .2rem;
+    min-height: 100%;
+    background-color: black;
 }
+

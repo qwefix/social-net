@@ -2,7 +2,6 @@ import React from 'react';
 import c from './DialogsItem.module.css';
 
 const DialogsItem = (props) => {
-    console.log(props)
     return (        
         <div className={c.item}>
             <div className= {c.ava}>

@@ -1,0 +1,51 @@
+.message{
+    display: grid;
+    margin-bottom: .5rem;
+    grid-template-columns: 3rem auto 1fr;
+    grid-template-rows: 1.6rem 3rem 1fr;
+    grid-template-areas: 
+        'name name .'
+        'ava c c'
+        '. c c'
+    ;
+    column-gap: .5rem;
+}
+.content{
+    position: relative;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    flex-grow: 1;
+    grid-area: c;
+}
+.ava{
+    grid-area: ava;
+    height: 3rem;
+    width: 3rem;
+    grid-area: ava;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+}
+.ava img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.name{
+    grid-area: name;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.arrow{
+    top:0;
+    left: -.75rem;
+    width: 0; 
+    height: 0; 
+    border-left: 1.5rem solid transparent;
+    /* border-right: 0.5rem solid transparent;     */
+    border-top: 1.5rem solid white;
+    position: absolute;
+}

@@ -1,0 +1,31 @@
+.item{
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    grid-template-rows: 5rem 1fr;
+    grid-template-areas: 
+        'ava name'
+        'ava message'
+    ;
+    margin-top: 1rem;
+    background-color: rgb(233, 233, 233);
+    border-radius: 2.5rem;
+}
+.ava{
+    height: 5rem;
+    width: 5rem;
+    grid-area: ava;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+}
+.ava img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.name{
+    font-size: 1.3rem;
+    font-weight: 500;
+}

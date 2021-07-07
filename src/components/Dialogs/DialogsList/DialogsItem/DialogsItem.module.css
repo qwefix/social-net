@@ -9,6 +9,10 @@
     margin-top: 1rem;
     background-color: rgb(233, 233, 233);
     border-radius: 2.5rem;
+    cursor: pointer;
+}
+.item:hover{    
+    background-color: rgb(255, 255, 255);
 }
 .ava{
     height: 5rem;
@@ -26,6 +30,7 @@
     max-height: 100%;
 }
 .name{
+    color: black;
     font-size: 1.3rem;
     font-weight: 500;
 }

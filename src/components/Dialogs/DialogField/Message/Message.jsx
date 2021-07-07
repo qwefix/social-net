@@ -8,12 +8,12 @@ const Message = ({ message }) => {
             <div className={c.ava}>
                 <img src={require(`../../../../Users/${message.from.path}/ava.jpg`).default} alt="" />
             </div>
+            <div className={c.name}>
+                {message.from.name}
+            </div>
             <div className={c.content}>
                 <div className={c.arrow} />
                 {message.content}
-            </div>
-            <div className={c.name}>
-                {message.from.name}
             </div>
         </div>
     )

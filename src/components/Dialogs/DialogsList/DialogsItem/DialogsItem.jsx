@@ -1,16 +1,15 @@
 import React from 'react';
 import c from './DialogsItem.module.css';
 
-const DialogsItem = (props) => {
+const DialogsItem = ({id}) => {
     return (        
         <div className={c.item}>
             <div className= {c.ava}>
-                <img src={require(`../../../../Users/${props.path}/ava.jpg`).default} alt="" />
+            <img src={require(`../../../../UsersJSON/${id}/ava.jpg`).default} alt="" />
             </div>
             <div className = {c.name}>
-                {props.name}
+                {require(`../../../../UsersJSON/${id}/info.json`).name}
             </div>
-
         </div>
     )
 }

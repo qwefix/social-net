@@ -30,6 +30,7 @@
     max-height: 100%;
 }
 .name{
+    margin-right:2rem;
     color: black;
     font-size: 1.3rem;
     font-weight: 500;

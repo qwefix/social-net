@@ -9,14 +9,12 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
 
-let myId
 if (localStorage.getItem('idReactSocialNet') === null) {
   localStorage.setItem('idReactSocialNet', '0');
-  myId = '0';
+  window.mySNQId = '0';
 } else {
-  myId = localStorage.getItem('idReactSocialNet');
+  window.mySNQId = localStorage.getItem('idReactSocialNet');
 }
-console.log(myId)
 
 
 function App() {

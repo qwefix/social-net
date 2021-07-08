@@ -10,11 +10,9 @@
     overflow:hidden;
     width: 7rem;
     height: 7rem;
-    border-radius: .3rem;
+    border-radius: 2rem;
     display: flex;
     background-color: azure;
-    border: .1rem solid black;
-    border-radius: 50%;
     align-items: stretch;
     justify-content: center;
 }
@@ -22,21 +20,21 @@
     padding: .5rem;
     flex-grow: 1;
 }
-
 .user_name{
     font-size: 1.5rem;
 }
 .like_wrapper{
     margin-right: 2rem;
-    cursor: pointer;
     width: fit-content;
     display: flex;
     align-items: center;
 }
 .likes{
+    cursor: default;
     margin-right: 1rem;
 }
-.like_button{   
+.like_button{
+    cursor: pointer;
     background-color: white;
     width: 3rem;
     height: 3rem;

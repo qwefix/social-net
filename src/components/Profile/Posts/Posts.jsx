@@ -2,12 +2,18 @@ import React from 'react';
 import c from './Posts.module.css';
 import Post from './Post/Post'
 
-const Posts = () => {
+const Posts = ({ posts }) => {
+    console.log(posts)
     return (
         <div className={c.posts}>
-            <Post text='hello' likes={1} />
-            <Post text='text texttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttex ttexttexttexttext'/>
-            <Post/> 
+            {posts.map(({ content, likes, author }, i) => {
+                return <Post
+                    ava={require(`../../../UsersJSON/${author}/ava.jpg`).default}
+                    key={i}
+                    likes={likes}
+                    content={content}
+                />
+            })}
         </div>
     )
 }

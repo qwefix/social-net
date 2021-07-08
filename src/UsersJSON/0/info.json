@@ -2,20 +2,26 @@
     "name": "Daria Bazhenova",
     "id": 0,
     "posts": [
-        [
             {
                 "content": "hello",
-                "likes": 0
+                "likes": 0,
+                "author":0
             },
             {
                 "content": "does anybody likes me ?",
-                "likes": 31
+                "likes": 31,
+                "author":0
             },
             {
                 "content": "hello there",
-                "likes": 1
+                "likes": 1,
+                "author":0
+            },
+            {
+                "content": "you can be my padavan now",
+                "likes": 1,
+                "author":2
             }
-        ]
     ],
     "dialogs": {
         "1": [

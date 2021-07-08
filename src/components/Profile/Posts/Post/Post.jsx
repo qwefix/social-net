@@ -1,9 +1,8 @@
 import React from 'react';
 import c from './Post.module.css';
-import ava from '../../ava.jpg';
 import likeImg from './like.png';
 
-const Post = (props) => {    
+const Post = ({ava,likes,content}) => {    
     return (
         <div className={c.post}>
             <div className={c.ava}>
@@ -11,10 +10,10 @@ const Post = (props) => {
             </div>
             <div className={c.content}>
                 <p className={c.user_name}>Darya Bazhenova</p>
-                {props.text}
+                {content}
             </div>
             <div className={c.like_wrapper} >
-                <p className={c.likes}>{props.likes}</p>
+                <p className={c.likes}>{likes}</p>
                 <div className={c.like_button} onClick={like}>
                     <img src={likeImg} alt="like" />
                 </div>
@@ -24,7 +23,6 @@ const Post = (props) => {
 }
 
 function like({ target }) {
-    console.log(this);
     const likeButton = target.closest(`.${c.like_button}`);
     const likes =  target.closest(`.${c.like_wrapper}`).querySelector(`.${c.likes}`);
     if(likeButton.classList.contains(`${c.active}`)){

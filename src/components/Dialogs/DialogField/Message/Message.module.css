@@ -19,7 +19,7 @@
     flex-grow: 1;
     grid-area: c;
 }
-.ava{
+.ava,.ava div{
     transition: .1s;
     cursor: pointer;
     grid-area: ava;

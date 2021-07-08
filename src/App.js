@@ -24,7 +24,7 @@ function App() {
         <Header />
         <Aside />
         <div className='main'>
-          <Route component={Profile} path='/profile' />
+          <Route component={Profile} path='/0' />
           <Route component={Dialogs} path='/dialogs' />
           <Route component={Music} path='/music' />
           <Route component={News} path='/news' />

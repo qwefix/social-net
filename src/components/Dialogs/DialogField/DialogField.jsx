@@ -5,9 +5,7 @@ import Message from './Message/Message';
 const DialogField = ({dialog}) => {
     return (
         <div className={c.field}>
-            {dialog.map((a,i)=>{
-               return  <Message message={a} key={i} />
-            })}
+            {dialog.map((m,i)=><Message message={m} key={i} />)}
         </div>
     )
 }

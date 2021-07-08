@@ -3,7 +3,6 @@ import c from './Posts.module.css';
 import Post from './Post/Post'
 
 const Posts = ({ posts }) => {
-    console.log(posts)
     return (
         <div className={c.posts}>
             {posts.map(({ content, likes, author }, i) => {

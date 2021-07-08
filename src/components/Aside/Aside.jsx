@@ -3,10 +3,10 @@ import c from './Aside.module.css';
 import { NavLink } from 'react-router-dom';
 
 const Aside = () => {
-    return (         
+    return (
         <aside className={c.aside} >
             <div className={c.list}>
-                <NavLink to='/profile' activeClassName={c.active}>Profile</NavLink>
+                <NavLink to={`/${window.mySNQId}`} activeClassName={c.active}>Profile</NavLink>
                 <NavLink to='/dialogs' activeClassName={c.active}>Messages</NavLink>
                 <NavLink to='/news' activeClassName={c.active}>News</NavLink>
                 <NavLink to='/music' activeClassName={c.active}>Music</NavLink>

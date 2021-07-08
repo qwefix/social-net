@@ -6,6 +6,7 @@
     position: relative;
 }
 .ava{
+    display: block;
     min-width: 7rem;
     overflow:hidden;
     width: 7rem;
@@ -15,13 +16,24 @@
     background-color: azure;
     align-items: stretch;
     justify-content: center;
+    transition: .2s;
+}
+.ava:hover{
+    transform: translateY(-.2rem);
 }
 .content{
     padding: .5rem;
     flex-grow: 1;
 }
 .user_name{
+    color:black;
     font-size: 1.5rem;
+    transition: .2s;
+    font-weight: 500;
+    display: block;
+}
+.user_name:hover{
+    transform: translateY(-.2rem);
 }
 .like_wrapper{
     margin-right: 2rem;

@@ -8,6 +8,7 @@ const Posts = ({ posts }) => {
             {posts.map(({ content, likes, author }, i) => {
                 return <Post
                     ava={require(`../../../UsersJSON/${author}/ava.jpg`).default}
+                    author={author}
                     key={i}
                     likes={likes}
                     content={content}

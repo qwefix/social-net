@@ -2,17 +2,17 @@
     "name": "General grievous",
     "id": 1,
     "posts": [
-        [
             {
                 "content": "you no mach for my power!!!",
-                "likes": 0
+                "likes": 2,
+                "author":1
             },
             {
                 "content": "2 sabers? Take my beer",
-                "likes": 31
+                "likes": 1,
+                "author":1
             }
-        ]
-    ],
+        ],
     "dialogs": {
         "1": [
             {

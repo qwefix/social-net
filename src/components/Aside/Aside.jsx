@@ -6,8 +6,8 @@ const Aside = () => {
     return (
         <aside className={c.aside} >
             <div className={c.list}>
-                <NavLink to={`/${window.mySNQId}`} activeClassName={c.active}>Profile</NavLink>
-                <NavLink to='/dialogs' activeClassName={c.active}>Messages</NavLink>
+                <NavLink to={`/profile/${window.mySNQId}`} activeClassName={c.active}>Profile</NavLink>
+                <NavLink to='/dialogs/1' activeClassName={c.active}>Messages</NavLink>
                 <NavLink to='/news' activeClassName={c.active}>News</NavLink>
                 <NavLink to='/music' activeClassName={c.active}>Music</NavLink>
                 <NavLink to='/settings' activeClassName={c.active}>Settings</NavLink>

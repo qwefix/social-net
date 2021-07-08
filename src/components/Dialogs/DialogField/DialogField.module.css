@@ -1,4 +1,8 @@
 .field{
     background-color:rgb(192, 192, 192);
     padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }

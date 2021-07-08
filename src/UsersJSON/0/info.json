@@ -2,56 +2,55 @@
     "name": "Daria Bazhenova",
     "id": 0,
     "posts": [
-            {
-                "content": "hello",
-                "likes": 0,
-                "author":0
-            },
-            {
-                "content": "does anybody likes me ?",
-                "likes": 31,
-                "author":0
-            },
-            {
-                "content": "hello there",
-                "likes": 1,
-                "author":0
-            },
-            {
-                "content": "you can be my padavan now",
-                "likes": 1,
-                "author":2
-            }
+        {
+            "content": "hello",
+            "likes": 0,
+            "author": 0
+        },
+        {
+            "content": "does anybody likes me ?",
+            "likes": 31,
+            "author": 0
+        },
+        {
+            "content": "hello there",
+            "likes": 1,
+            "author": 0
+        },
+        {
+            "content": "you can be my padavan now",
+            "likes": 1,
+            "author": 2
+        }
     ],
     "dialogs": {
         "1": [
             {
                 "content": "hello",
-                "sendBy": 1
+                "sendBy": "1"
             },
             {
                 "content": "hello there",
-                "sendBy": 0
+                "sendBy": "0"
             },
             {
                 "content": "you are tearing me apart",
-                "sendBy": 1
+                "sendBy": "1"
             }
         ],
         "2": [
             {
                 "content": "hello",
-                "sendBy": 0
+                "sendBy": "0"
             },
             {
                 "content": "teach me to be jedai",
-                "sendBy": 0
+                "sendBy": "0"
             },
             {
                 "content": "send to grievous 'hello there'",
-                "sendBy": 2
+                "sendBy": "2"
             }
-            
         ]
     }
 }

@@ -1,18 +1,13 @@
 {
     "name": "General Kenobi",
-    "id": 1,
+    "id": 2,
     "posts": [
-        [
             {
                 "content": "you no mach for my power!!!",
-                "likes": 0
-            },
-            {
-                "content": "2 sabers? Take my beer",
-                "likes": 31
+                "likes": 0,
+                "author":2
             }
-        ]
-    ],
+        ],
     "dialogs": {
         "1": [
             {

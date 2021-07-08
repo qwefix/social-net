@@ -1,20 +1,23 @@
 import React from 'react';
 import c from './Post.module.css';
 import likeImg from './like.png';
+import { NavLink } from 'react-router-dom';
 
-const Post = ({ava,likes,content}) => {    
+const Post = ({ ava, likes, content, author }) => {
     return (
         <div className={c.post}>
 
-            <div className={c.ava}>
+            <NavLink to={`/profile/${author}`} className={c.ava}>
                 <img src={ava} alt="avatar" />
-            </div>
+            </NavLink>
 
             <div className={c.content}>
-                <p className={c.user_name}>Darya Bazhenova</p>
-                {content}
+                <NavLink to={`/profile/${author}`} className={c.user_name}>
+                    {require(`../../../../UsersJSON/${author}/info.json`).name}
+                </NavLink>
+                <p>{content}</p>
             </div>
-            
+
             <div className={c.like_wrapper} >
                 <p className={c.likes}>{likes}</p>
                 <div className={c.like_button} onClick={like}>
@@ -27,10 +30,10 @@ const Post = ({ava,likes,content}) => {
 
 function like({ target }) {
     const likeButton = target.closest(`.${c.like_button}`);
-    const likes =  target.closest(`.${c.like_wrapper}`).querySelector(`.${c.likes}`);
-    if(likeButton.classList.contains(`${c.active}`)){
+    const likes = target.closest(`.${c.like_wrapper}`).querySelector(`.${c.likes}`);
+    if (likeButton.classList.contains(`${c.active}`)) {
         likes.innerText--;
-    }else{
+    } else {
         likes.innerText++;
     }
     likeButton.classList.toggle(`${c.active}`);

@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
@@ -24,8 +24,9 @@ function App() {
         <Header />
         <Aside />
         <div className='main'>
-          <Route component={Profile} path='/0' />
-          <Route component={Dialogs} path='/dialogs' />
+          {/* <Route exact path='/dialogs'><Redirect to="/dialogs/null" /></Route> */}
+          <Route component={Dialogs} path='/dialogs/:id' />
+          <Route component={Profile} path='/profile/:id' />
           <Route component={Music} path='/music' />
           <Route component={News} path='/news' />
           <Route component={Settings} path='/settings' />

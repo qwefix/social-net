@@ -10,6 +10,17 @@
         '. c c'
     ;
     column-gap: .5rem;
+    width: fit-content;
+}
+.message.from_me{
+    grid-template-columns: auto auto 3rem;
+    grid-template-rows:  1fr  3rem 1.6rem;
+    grid-template-areas: 
+        '. name name'
+        'c c ava'
+        'c c .'
+    ;
+    align-self: flex-end;
 }
 .content{
     position: relative;
@@ -58,7 +69,12 @@
     left: -.75rem;
     width: 0; 
     height: 0; 
+    border-right: 1.5rem solid transparent;
     border-left: 1.5rem solid transparent;
     border-top: 1.5rem solid white;
     position: absolute;
+}
+.from_me .arrow{
+    left:unset;
+    right: -.75rem;
 }

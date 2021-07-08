@@ -47,6 +47,9 @@
 .name:hover{
     opacity: 0.7;
 }
+.name a{
+    color: black;
+}
 .ava:hover{
     transform: scale(1.05);
 }

@@ -1,19 +1,23 @@
 import React from 'react';
 import c from './Message.module.css';
+import { NavLink } from 'react-router-dom';
 
-
-const Message = ({ message }) => {
+const Message = ({ message: { content, sendBy } }) => {
     return (
         <div className={`${c.message}`}>
-            <div className={c.ava}>
-                <img src={require(`../../../../Users/${message.from.path}/ava.jpg`).default} alt="" />
-            </div>
+            <NavLink  className={c.ava} to ={`/${sendBy}`}>
+                <div className={c.ava}>
+                    <img src={require(`../../../../UsersJSON/${sendBy}/ava.jpg`).default} alt="" />
+                </div>
+            </NavLink>
             <div className={c.name}>
-                {message.from.name}
+                <NavLink to ={`/${sendBy}`}>
+                 {require(`../../../../UsersJSON/${sendBy}/info.json`).name}
+                </NavLink>
             </div>
             <div className={c.content}>
                 <div className={c.arrow} />
-                {message.content}
+                {content}
             </div>
         </div>
     )

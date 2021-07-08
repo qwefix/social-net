@@ -4,7 +4,6 @@ import DialogsItem from './DialogsItem/DialogsItem';
 import { NavLink } from 'react-router-dom';
 
 const DialogsList = ({idList}) => {
-    console.log(idList)
     return (
         <div className={c.dialogs_list}>
             <p className={c.header}>Dialogs</p>

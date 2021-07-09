@@ -9,11 +9,12 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
 
+let myID
 if (localStorage.getItem('idReactSocialNet') === null) {
   localStorage.setItem('idReactSocialNet', '0');
-  window.mySNQId = '0';
+  myID = '0';
 } else {
-  window.mySNQId = localStorage.getItem('idReactSocialNet');
+  myID = localStorage.getItem('idReactSocialNet');
 }
 
 
@@ -22,11 +23,19 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <Header />
-        <Aside />
+        <Aside myID={myID} />
         <div className='main'>
-          {/* <Route exact path='/dialogs'><Redirect to="/dialogs/null" /></Route> */}
-          <Route component={Dialogs} path='/dialogs/:id' />
-          <Route component={Profile} path='/profile/:id' />
+          <Route render={(p) => < Dialogs myID={myID} targetID={p.match.params.id} />} path='/dialogs/:id' />
+
+          <Route render={
+            (p) => < Profile
+              ava={require(`./UsersJSON/${p.match.params.id}/ava.jpg`).default}
+              wp={require(`./UsersJSON/${p.match.params.id}/wp.jpg`).default}
+              user={require(`./UsersJSON/${p.match.params.id}/info.json`)}
+              myID={myID}
+              targetID={p.match.params.id}
+            />} path='/profile/:id' />
+
           <Route component={Music} path='/music' />
           <Route component={News} path='/news' />
           <Route component={Settings} path='/settings' />

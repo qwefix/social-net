@@ -4,13 +4,13 @@ import DialogsList from './DialogsList/DialogsList';
 import DialogField from './DialogField/DialogField';
 
 
-const Dialogs = (props) => {
-    const { dialogs } = require(`../../UsersJSON/${window.mySNQId}/info.json`);
-    const targetDialog =dialogs[props.match.params.id];
+const Dialogs = ({ targetID, myID }) => {
+    const { dialogs } = require(`../../UsersJSON/${myID}/info.json`);
+    const targetDialog = dialogs[targetID];
     return (
         <div className={c.dialogs_wrapper}>
             <DialogsList idList={Object.keys(dialogs)} />
-            <DialogField dialog={targetDialog||null} />
+            <DialogField myID={myID} dialog={targetDialog || null} />
         </div>
     )
 }

@@ -20,7 +20,7 @@ const Message = ({ message: { content, sendBy } }) => {
 
             <div className={c.content}>
                 <div className={c.arrow} />
-                {content}
+                <p>{content}</p>
             </div>
         </div>
     )

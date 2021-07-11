@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
@@ -16,7 +16,7 @@ if (localStorage.getItem('idReactSocialNet') === null) {
 } else {
   myID = localStorage.getItem('idReactSocialNet');
 }
-
+const myProfile = require(`./UsersJSON/${myID}/info.json`);
 
 function App() {
   return (
@@ -25,15 +25,44 @@ function App() {
         <Header />
         <Aside myID={myID} />
         <div className='main'>
-          <Route render={(p) => < Dialogs myID={myID} targetID={p.match.params.id} />} path='/dialogs/:id' />
-
+          <Route render={
+            (p) => < Dialogs
+              dialogsList={
+                Object.keys(myProfile.dialogs).map((a, i) => {
+                  return {
+                    ava: require(`./UsersJSON/${a}/ava.jpg`).default,
+                    name: require(`./UsersJSON/${a}/info.json`).name,
+                    id: require(`./UsersJSON/${a}/info.json`).id,
+                  }
+                })}
+              dialog={myProfile.dialogs[p.match.params.id]
+                .map(a => {
+                  return {
+                    ava: require(`./UsersJSON/${a.sendBy}/ava.jpg`).default,
+                    name: require(`./UsersJSON/${a.sendBy}/info.json`).name,
+                    sendBy: a.sendBy,
+                    content: a.content
+                  }
+                })
+              }
+              myID={myID}
+            />} path='/dialogs/:id' />
           <Route render={
             (p) => < Profile
               ava={require(`./UsersJSON/${p.match.params.id}/ava.jpg`).default}
               wp={require(`./UsersJSON/${p.match.params.id}/wp.jpg`).default}
-              user={require(`./UsersJSON/${p.match.params.id}/info.json`)}
-              myID={myID}
-              targetID={p.match.params.id}
+              name={require(`./UsersJSON/${p.match.params.id}/info.json`).name}
+              posts={require(`./UsersJSON/${p.match.params.id}/info.json`).posts
+                .map(a => {
+                  return {
+                    content:a.content,
+                    likes:a.likes,
+                    authorId:a.author,
+                    ava:require(`./UsersJSON/${a.author}/ava.jpg`).default,
+                    name:require(`./UsersJSON/${a.author}/info.json`).name
+                  }
+                })
+              }
             />} path='/profile/:id' />
 
           <Route component={Music} path='/music' />

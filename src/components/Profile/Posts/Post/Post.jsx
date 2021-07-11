@@ -3,17 +3,17 @@ import c from './Post.module.css';
 import likeImg from './like.png';
 import { NavLink } from 'react-router-dom';
 
-const Post = ({ ava, likes, content, author }) => {
+const Post = ({ post: { ava, likes, content, authorId, name } }) => {
     return (
         <div className={c.post}>
 
-            <NavLink to={`/profile/${author}`} className={c.ava}>
+            <NavLink to={`/profile/${authorId}`} className={c.ava}>
                 <img src={ava} alt="avatar" />
             </NavLink>
 
             <div className={c.content}>
-                <NavLink to={`/profile/${author}`} className={c.user_name}>
-                    {require(`../../../../UsersJSON/${author}/info.json`).name}
+                <NavLink to={`/profile/${authorId}`} className={c.user_name}>
+                    {name}
                 </NavLink>
                 <p>{content}</p>
             </div>

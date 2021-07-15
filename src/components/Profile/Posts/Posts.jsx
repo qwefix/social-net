@@ -5,13 +5,10 @@ import Post from './Post/Post'
 const Posts = ({ posts }) => {
     return (
         <div className={c.posts}>
-            {posts.map(({ content, likes, author }, i) => {
+            {posts.map((p, i) => {
                 return <Post
-                    ava={require(`../../../UsersJSON/${author}/ava.jpg`).default}
-                    author={author}
+                    post={p}
                     key={i}
-                    likes={likes}
-                    content={content}
                 />
             })}
         </div>

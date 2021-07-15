@@ -119,6 +119,5 @@ Object.keys(state).forEach(id => {
     state[id].ava = require(`./${id}/ava.jpg`).default;
     state[id].wp = require(`./${id}/wp.jpg`).default;
 })
-console.log(state)
 
 export default state

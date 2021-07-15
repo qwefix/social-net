@@ -1,6 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-
+import { BrowserRouter, Route, } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
 import Profile from './components/Profile/Profile';
@@ -18,7 +17,8 @@ if (localStorage.getItem('idReactSocialNet') === null) {
 }
 
 
-function App() {
+function App({ state }) {
+  console.log(state['0'])
   return (
     <BrowserRouter>
       <div className="app">
@@ -26,12 +26,12 @@ function App() {
         <Aside myID={myID} />
         <div className='main'>
           <Route render={(p) => < Dialogs myID={myID} targetID={p.match.params.id} />} path='/dialogs/:id' />
-
           <Route render={
             (p) => < Profile
-              ava={require(`./UsersJSON/${p.match.params.id}/ava.jpg`).default}
-              wp={require(`./UsersJSON/${p.match.params.id}/wp.jpg`).default}
-              user={require(`./UsersJSON/${p.match.params.id}/info.json`)}
+              ava={state[p.match.params.id].ava}
+              wp={state[p.match.params.id].wp}
+              name={state[p.match.params.id].name}
+              posts={state[p.match.params.id].posts}
               myID={myID}
               targetID={p.match.params.id}
             />} path='/profile/:id' />

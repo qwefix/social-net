@@ -4,7 +4,7 @@ import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 
-const Profile = ({ava,wp,user:{name,posts}}) => {
+const Profile = ({ava,wp,name,posts}) => {
     // const id = props.match.params.id;
     // const {name,posts} = require(`../../UsersJSON/${id}/info.json`);
     // const ava = require(`../../UsersJSON/${id}/ava.jpg`).default;

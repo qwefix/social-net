@@ -1,6 +1,8 @@
-.new_post{
+.new_message{
     display: flex;
-    position: relative;
+    position: absolute;
+    width: 100%;
+    bottom: .5rem;
 }
 .textarea{
     height: 2.5rem;

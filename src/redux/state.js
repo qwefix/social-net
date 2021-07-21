@@ -120,4 +120,12 @@ Object.keys(state).forEach(id => {
     state[id].wp = require(`./${id}/wp.jpg`).default;
 })
 
+export function addPostBLL(postContent, authorId, targetId) {
+    state[targetId].posts.push({
+        content: postContent,
+        likes: 0,
+        author: authorId
+    })
+}
+
 export default state

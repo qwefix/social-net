@@ -7,6 +7,8 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
+import { addPostBLL } from './redux/state';
+
 
 let myID
 if (localStorage.getItem('idReactSocialNet') === null) {
@@ -15,7 +17,7 @@ if (localStorage.getItem('idReactSocialNet') === null) {
 } else {
   myID = localStorage.getItem('idReactSocialNet');
 }
-
+// addPostBLL('hello React JS', myID, 1)
 function App({ state }) {
   return (
     <BrowserRouter>
@@ -47,6 +49,7 @@ function App({ state }) {
             />} path='/dialogs/:id' />
           <Route render={
             (p) => < Profile
+              addPostObj={{ addPostBLL, id: p.match.params.id, myID }}
               ava={state[p.match.params.id].ava}
               wp={state[p.match.params.id].wp}
               name={state[p.match.params.id].name}

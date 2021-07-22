@@ -136,7 +136,7 @@ Object.keys(state).forEach(id => {
     state[id].ava = require(`./${id}/ava.jpg`).default;
     state[id].wp = require(`./${id}/wp.jpg`).default;
 })
-function keydownPostBLL(event, ids, ref, autoGrow) {
+function keydownPostBLL(event, ids,) {
     const key = event.nativeEvent.data
     if (key) {
         state[ids.myID].postInput[ids.id] += key
@@ -151,6 +151,7 @@ function addPostBLL(authorId, targetId) {
         likes: 0,
         author: authorId
     })
+    console.log(state[authorId].postInput[targetId])
     state[authorId].postInput[targetId] = ''
     renderUI(state, newPostFuncs)
 }
@@ -162,7 +163,7 @@ function postEntBspHandlerBLL(symbol, ids) {
     if (symbol === 'bsp') {
         state[ids.myID].postInput[ids.id] = state[ids.myID].postInput[ids.id].substring(0, state[ids.myID].postInput[ids.id].length - 1)
     }
-    renderUI(state, newPostFuncs)
+    renderUI(state, newPostFuncs);
 }
 
 export const newPostFuncs = { addPostBLL, keydownPostBLL, postEntBspHandlerBLL }

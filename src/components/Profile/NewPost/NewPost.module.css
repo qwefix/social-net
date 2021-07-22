@@ -3,7 +3,7 @@
     position: relative;
 }
 .textarea{
-    height: 2.5rem;
+    height: 7rem;
     flex-grow: 1;
     width: 100%;
     resize: none;

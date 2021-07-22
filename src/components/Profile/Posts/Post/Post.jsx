@@ -15,7 +15,7 @@ const Post = ({ post: { ava, likes, content, authorId, name } }) => {
                 <NavLink to={`/profile/${authorId}`} className={c.user_name}>
                     {name}
                 </NavLink>
-                <p>{content}</p>
+                <p className={c.text_content}>{content}</p>
             </div>
 
             <div className={c.like_wrapper} >

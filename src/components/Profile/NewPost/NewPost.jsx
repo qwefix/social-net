@@ -1,19 +1,14 @@
 import React from 'react';
 import c from './NewPost.module.css';
 
-const NewPost = ({ myID, id, inputValue, newPostFuncs: { keydownPostBLL, addPostBLL, postEntBspHandlerBLL } }) => {
+const NewPost = ({ myID, id, inputValue, add, change }) => {
     const newPostTextArea = React.createRef();
-    const addPostHandler = (e) => {
-        if (e.type === 'click' || (e.type === "keyup" && (e.code === 'Enter' || e.keyCode === 0) && e.ctrlKey)) {
-            newPostTextArea.current.value === '' || addPostBLL(myID, id)
-        }
-        if (e.type === "keyup") {
-            if (e.key === "Enter" && !e.ctrlKey) {
-                postEntBspHandlerBLL('ent', { myID, id })
-            }
-            if (e.key === "Backspace") {
-                postEntBspHandlerBLL('bsp', { myID, id })
-            }
+    const addPostByButtonClick = () => {
+        newPostTextArea.current.value === '' || add(id, myID)
+    }
+    const addPostByEnter = (e) => {
+        if ((e.key === 'Enter' || e.keyCode === 0) && e.ctrlKey) {
+            newPostTextArea.current.value === '' || add(id, myID)
         }
     }
 
@@ -23,14 +18,14 @@ const NewPost = ({ myID, id, inputValue, newPostFuncs: { keydownPostBLL, addPost
                 className={c.textarea}
                 ref={newPostTextArea}
                 placeholder="what's up? "
-                onKeyUp={addPostHandler}
-                onChange={(e) => {
-                    keydownPostBLL(e, { myID, id });
+                onChange={() => {
+                    change(newPostTextArea.current.value, id, myID);
                 }}
+                onKeyUp={addPostByEnter}
                 value={inputValue}
             >
             </textarea>
-            <button onClick={addPostHandler} className={c.button}>Add</button>
+            <button onClick={addPostByButtonClick} className={c.button}>Add</button>
         </div>
     )
 }

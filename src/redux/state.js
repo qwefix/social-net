@@ -129,44 +129,32 @@ let state = {
             0: '',
             1: '',
             2: '',
-        }
-    }
+        },
+    },
 }
+
 Object.keys(state).forEach(id => {
     state[id].ava = require(`./${id}/ava.jpg`).default;
     state[id].wp = require(`./${id}/wp.jpg`).default;
 })
-function keydownPostBLL(event, ids,) {
-    const key = event.nativeEvent.data
-    if (key) {
-        state[ids.myID].postInput[ids.id] += key
-        renderUI(state, newPostFuncs)
-    }
+
+function change(content, targetID, authorID) {
+    state[authorID].postInput[targetID] = content;
+    renderUI(state,methods)
 }
 
-function addPostBLL(authorId, targetId) {
-    console.log(authorId)
-    state[targetId].posts.push({
-        content: state[authorId].postInput[targetId],
+function add(targetID, authorID) {
+    state[targetID].posts.push({
+        content: state[authorID].postInput[targetID],
         likes: 0,
-        author: authorId
+        author: authorID
     })
-    console.log(state[authorId].postInput[targetId])
-    state[authorId].postInput[targetId] = ''
-    renderUI(state, newPostFuncs)
+    state[authorID].postInput[targetID] = ''
+    renderUI(state,methods)
 }
-
-function postEntBspHandlerBLL(symbol, ids) {
-    if (symbol === 'ent') {
-        state[ids.myID].postInput[ids.id] += '\n'
-    }
-    if (symbol === 'bsp') {
-        state[ids.myID].postInput[ids.id] = state[ids.myID].postInput[ids.id].substring(0, state[ids.myID].postInput[ids.id].length - 1)
-    }
-    renderUI(state, newPostFuncs);
-}
-
-export const newPostFuncs = { addPostBLL, keydownPostBLL, postEntBspHandlerBLL }
-
 
 export default state
+
+export const methods ={
+    newPost:{change,add},
+}

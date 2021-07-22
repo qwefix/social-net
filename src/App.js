@@ -16,7 +16,7 @@ if (localStorage.getItem('idReactSocialNet') === null) {
   myID = localStorage.getItem('idReactSocialNet');
 }
 
-function App({ state, newPostFuncs }) {
+function App({ state, methods }) {
   return (
     <BrowserRouter>
       <div className="app">
@@ -26,7 +26,7 @@ function App({ state, newPostFuncs }) {
           <Route render={
             (p) => < Dialogs
               dialogsList={
-                Object.keys(state[myID].dialogs).map((a, i) => {
+                Object.keys(state[myID].dialogs).map((a) => {
                   return {
                     ava: state[a].ava,
                     name: state[a].name,
@@ -47,17 +47,17 @@ function App({ state, newPostFuncs }) {
             />} path='/dialogs/:id' />
           <Route render={
             (p) => < Profile
-              addPostObj={{ newPostFuncs, id: p.match.params.id, myID, inputValue: state[myID].postInput[p.match.params.id] }}
+              addPostObj={{
+                id: p.match.params.id,
+                myID,
+                inputValue: state[myID].postInput[p.match.params.id]
+              }}
+              newPostMethods={methods.newPost}
               ava={state[p.match.params.id].ava}
               wp={state[p.match.params.id].wp}
               name={state[p.match.params.id].name}
               posts={state[p.match.params.id].posts
                 .map(a => {
-                  try {
-
-                  } catch (error) {
-                    console.log(state[a.author])
-                  }
                   return {
                     content: a.content,
                     likes: a.likes,

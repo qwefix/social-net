@@ -2,9 +2,9 @@ import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function renderUI(state, funcs) {
+function renderUI(state, methods) {
     ReactDOM.render(
-        <App state={state} newPostFuncs={funcs} />,
+        <App state={state} methods={methods}/>,
         document.getElementById('root')
     );
 }

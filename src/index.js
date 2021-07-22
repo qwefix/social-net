@@ -1,5 +1,6 @@
 import './index.css';
-import state, { newPostFuncs } from './redux/state'
+import state, { methods } from './redux/state'
 import renderUI from './renderUI';
 
-renderUI(state, newPostFuncs);
+
+renderUI(state, methods);

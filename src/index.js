@@ -1,13 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import state from './redux/state'
+import state, { newPostFuncs } from './redux/state'
+import renderUI from './renderUI';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App state={state} />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
+renderUI(state, newPostFuncs);

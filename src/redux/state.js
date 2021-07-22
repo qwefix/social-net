@@ -1,3 +1,5 @@
+import renderUI from "../renderUI";
+
 let state = {
     0: {
         "name": "Daria Bazhenova",
@@ -53,6 +55,11 @@ let state = {
                     "sendBy": "2"
                 }
             ]
+        },
+        postInput: {
+            0: '',
+            1: '',
+            2: '',
         }
     },
     1: {
@@ -85,6 +92,11 @@ let state = {
                     "sendBy": 1
                 }
             ]
+        },
+        postInput: {
+            0: '',
+            1: '',
+            2: '',
         }
     },
     2: {
@@ -112,6 +124,11 @@ let state = {
                     "sendBy": 1
                 }
             ]
+        },
+        postInput: {
+            0: '',
+            1: '',
+            2: '',
         }
     }
 }
@@ -119,13 +136,36 @@ Object.keys(state).forEach(id => {
     state[id].ava = require(`./${id}/ava.jpg`).default;
     state[id].wp = require(`./${id}/wp.jpg`).default;
 })
+function keydownPostBLL(event, ids, ref, autoGrow) {
+    const key = event.nativeEvent.data
+    if (key) {
+        state[ids.myID].postInput[ids.id] += key
+        renderUI(state, newPostFuncs)
+    }
+}
 
-export function addPostBLL(postContent, authorId, targetId) {
+function addPostBLL(authorId, targetId) {
+    console.log(authorId)
     state[targetId].posts.push({
-        content: postContent,
+        content: state[authorId].postInput[targetId],
         likes: 0,
         author: authorId
     })
+    state[authorId].postInput[targetId] = ''
+    renderUI(state, newPostFuncs)
 }
+
+function postEntBspHandlerBLL(symbol, ids) {
+    if (symbol === 'ent') {
+        state[ids.myID].postInput[ids.id] += '\n'
+    }
+    if (symbol === 'bsp') {
+        state[ids.myID].postInput[ids.id] = state[ids.myID].postInput[ids.id].substring(0, state[ids.myID].postInput[ids.id].length - 1)
+    }
+    renderUI(state, newPostFuncs)
+}
+
+export const newPostFuncs = { addPostBLL, keydownPostBLL, postEntBspHandlerBLL }
+
 
 export default state

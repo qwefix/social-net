@@ -9,7 +9,8 @@ const NewPost = ({ myID, id, inputValue, newPostFuncs: { keydownPostBLL, addPost
         }
         if (e.type === "keyup") {
             if (e.key === "Enter" && !e.ctrlKey) {
-                postEntBspHandlerBLL('ent', { myID, id })            }
+                postEntBspHandlerBLL('ent', { myID, id })
+            }
             if (e.key === "Backspace") {
                 postEntBspHandlerBLL('bsp', { myID, id })
             }

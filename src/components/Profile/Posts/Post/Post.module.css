@@ -26,7 +26,8 @@
     flex-grow: 1;
 }
 .text_content{
-    white-space: pre-line
+    word-break: break-all;
+    white-space: pre-line;
 }
 .user_name{
     color:black;

@@ -1,4 +1,7 @@
-import renderUI from "../renderUI";
+let renderUI = () => { console.log('no observer') }
+export function subscriber(observer) {
+    renderUI = observer
+}
 
 let state = {
     0: {
@@ -166,7 +169,6 @@ function newMessageAdd(myID, targetID) {
     state[myID].dialogs[targetID].push(message)
     state[targetID].dialogs[myID].push(message)
     state[myID].dialogs[targetID].newMessage = ''
-    console.log(state[myID].dialogs[targetID].newMessage)
     renderUI(state, methods)
 }
 

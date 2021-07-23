@@ -33,25 +33,33 @@ function App({ state, methods }) {
                     id: a,
                   }
                 })}
-              dialog={state[myID].dialogs[p.match.params.id]
-                .map(a => {
-                  return {
-                    ava: state[a.sendBy].ava,
-                    name: state[a.sendBy].name,
-                    sendBy: a.sendBy,
-                    content: a.content
-                  }
-                })
+
+              dialog={
+                state[myID].dialogs[p.match.params.id]
+                  .map(a => {
+                    return {
+                      ava: state[a.sendBy].ava,
+                      name: state[a.sendBy].name,
+                      sendBy: a.sendBy,
+                      content: a.content
+                    }
+                  })
               }
               myID={myID}
-            />} path='/dialogs/:id' />
+              targetID={p.match.params.id}
+              newMessageMethods={methods.newMessage}
+              newMessageValue={state[myID].dialogs[p.match.params.id].newMessage || ''}
+            />}
+            path='/dialogs/:id' />
           <Route render={
             (p) => < Profile
-              addPostObj={{
-                id: p.match.params.id,
-                myID,
-                inputValue: state[myID].postInput[p.match.params.id]
-              }}
+              addPostObj={
+                {
+                  id: p.match.params.id,
+                  myID,
+                  inputValue: state[myID].postInput[p.match.params.id]
+                }
+              }
               newPostMethods={methods.newPost}
               ava={state[p.match.params.id].ava}
               wp={state[p.match.params.id].wp}
@@ -67,7 +75,8 @@ function App({ state, methods }) {
                   }
                 })
               }
-            />} path='/profile/:id' />
+            />}
+            path='/profile/:id' />
 
           <Route component={Music} path='/music' />
           <Route component={News} path='/news' />

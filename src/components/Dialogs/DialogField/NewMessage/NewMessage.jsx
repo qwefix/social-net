@@ -1,35 +1,41 @@
 import React from 'react';
 import c from './NewMessage.module.css';
 
-const NewMessage = ()=>{
+const NewMessage = ({ myID, targetID, newMessageMethods: { change, add }, newMessageValue }) => {
     const textArea = React.createRef();
-    const addPostHandler = (e) => {
-        if (e.type === 'click' || (e.type === "keydown" && (e.code === 'Enter' || e.keyCode === 0)&&!e.ctrlKey)) {
-            e.preventDefault();
-            textArea.current.value === '' || alert("must be send message: " + textArea.current.value);
-            textArea.current.value = '';
-            autoGrow({target:textArea.current})
+
+    function addMessageByEnter(e) {
+        if ((e.code === 'Enter' || e.keyCode === 0) && e.ctrlKey) {
+            textArea.current.value += '\n';
         }
-        if((e.code === 'Enter' || e.keyCode === 0)&&e.ctrlKey){
-            textArea.current.value +='\n';
-            autoGrow({target:textArea.current})
+        if ((e.code === 'Enter' || e.keyCode === 0) && !e.ctrlKey) {
+            textArea.current.value === '' || add(myID, targetID);
+            textArea.current.value = ''
         }
     }
-    const autoGrow=(e   )=>{
-        e.target.style.height = "10px";
-        e.target.style.height = ( e.target.scrollHeight)+"px";
+    function addMessageByButtonCkick() {
+        textArea.current.value === '' || add(myID, targetID);
     }
-    return(
+
+
+    return (
         <div className={c.new_message}>
             <textarea
+                autoFocus
                 className={c.textarea}
                 ref={textArea}
-                placeholder="what's up? "
-                onKeyDown={addPostHandler}
-                onChange = {autoGrow}
+                placeholder="what's up?"
+                onKeyDown={addMessageByEnter}
+                onChange={(e) => {
+                    if(e.nativeEvent.inputType!== "insertLineBreak"){                        
+                        change(textArea.current.value, myID, targetID)
+                    }
+                }
+                }
+                value={newMessageValue}
             >
             </textarea>
-            <button onClick={addPostHandler} className={c.button}>Add</button>
+            <button onClick={addMessageByButtonCkick} className={c.button}>Add</button>
         </div>
     )
 }

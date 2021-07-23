@@ -1,9 +1,19 @@
 .field{
-    position: relative;
-    background-color:rgb(192, 192, 192);
-    padding: .5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    padding: .5rem;
+}
+.wrapper{
+    flex-grow: 1;
+    /* background-color:rgb(192, 192, 192); */
+    overflow-y: scroll;
+}
+.mainWrapper{
+    background-color:rgb(192, 192, 192);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }

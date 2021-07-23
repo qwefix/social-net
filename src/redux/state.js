@@ -78,7 +78,7 @@ let state = {
             }
         ],
         "dialogs": {
-            "1": [
+            "0": [
                 {
                     "content": "hello",
                     "sendBy": 1
@@ -110,18 +110,18 @@ let state = {
             }
         ],
         "dialogs": {
-            "1": [
+            "0": [
                 {
                     "content": "hello",
-                    "sendBy": 1
+                    "sendBy": "0"
                 },
                 {
-                    "content": "hello there",
-                    "sendBy": 0
+                    "content": "teach me to be jedai",
+                    "sendBy": "0"
                 },
                 {
-                    "content": "you are tearing me apart",
-                    "sendBy": 1
+                    "content": "send to grievous 'hello there'",
+                    "sendBy": "2"
                 }
             ]
         },
@@ -138,23 +138,48 @@ Object.keys(state).forEach(id => {
     state[id].wp = require(`./${id}/wp.jpg`).default;
 })
 
-function change(content, targetID, authorID) {
+function newPostChange(content, targetID, authorID) {
     state[authorID].postInput[targetID] = content;
-    renderUI(state,methods)
+    renderUI(state, methods)
 }
 
-function add(targetID, authorID) {
+function newPostAdd(targetID, authorID) {
     state[targetID].posts.push({
         content: state[authorID].postInput[targetID],
         likes: 0,
         author: authorID
     })
     state[authorID].postInput[targetID] = ''
-    renderUI(state,methods)
+    renderUI(state, methods)
 }
+
+function newMessageChange(content, myID, targetID) {
+    state[myID].dialogs[targetID].newMessage = content;
+    renderUI(state, methods)
+}
+
+function newMessageAdd(myID, targetID) {
+    let message = {
+        content: state[myID].dialogs[targetID].newMessage,
+        sendBy: myID,
+    }
+    state[myID].dialogs[targetID].push(message)
+    state[targetID].dialogs[myID].push(message)
+    state[myID].dialogs[targetID].newMessage = ''
+    console.log(state[myID].dialogs[targetID].newMessage)
+    renderUI(state, methods)
+}
+
 
 export default state
 
-export const methods ={
-    newPost:{change,add},
+export const methods = {
+    newPost: {
+        change: newPostChange,
+        add: newPostAdd
+    },
+    newMessage: {
+        change: newMessageChange,
+        add: newMessageAdd
+    }
 }

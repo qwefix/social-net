@@ -1,7 +1,10 @@
+import store from "./store"
+
 let renderUI = () => { console.log('no observer') }
 export function subscriber(observer) {
     renderUI = observer
 }
+
 
 let state = {
     0: {
@@ -143,7 +146,7 @@ Object.keys(state).forEach(id => {
 
 function newPostChange(content, targetID, authorID) {
     state[authorID].postInput[targetID] = content;
-    renderUI(state, methods)
+    renderUI(store,state, methods)
 }
 
 function newPostAdd(targetID, authorID) {
@@ -153,12 +156,12 @@ function newPostAdd(targetID, authorID) {
         author: authorID
     })
     state[authorID].postInput[targetID] = ''
-    renderUI(state, methods)
+    renderUI(store,state, methods)
 }
 
 function newMessageChange(content, myID, targetID) {
     state[myID].dialogs[targetID].newMessage = content;
-    renderUI(state, methods)
+    renderUI(store,state, methods)
 }
 
 function newMessageAdd(myID, targetID) {
@@ -169,9 +172,8 @@ function newMessageAdd(myID, targetID) {
     state[myID].dialogs[targetID].push(message)
     state[targetID].dialogs[myID].push(message)
     state[myID].dialogs[targetID].newMessage = ''
-    renderUI(state, methods)
+    renderUI(store,state, methods)
 }
-
 
 export default state
 

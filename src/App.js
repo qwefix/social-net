@@ -7,6 +7,7 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
+import store from './redux/store';
 
 let myID
 if (localStorage.getItem('idReactSocialNet') === null) {
@@ -24,33 +25,9 @@ function App({ state, methods }) {
         <Aside myID={myID} />
         <div className='main'>
           <Route render={
-            (p) => < Dialogs
-              dialogsList={
-                Object.keys(state[myID].dialogs).map((a) => {
-                  return {
-                    ava: state[a].ava,
-                    name: state[a].name,
-                    id: a,
-                  }
-                })}
-
-              dialog={
-                state[myID].dialogs[p.match.params.id]
-                  .map(a => {
-                    return {
-                      ava: state[a.sendBy].ava,
-                      name: state[a.sendBy].name,
-                      sendBy: a.sendBy,
-                      content: a.content
-                    }
-                  })
-              }
-              myID={myID}
-              targetID={p.match.params.id}
-              newMessageMethods={methods.newMessage}
-              newMessageValue={state[myID].dialogs[p.match.params.id].newMessage || ''}
-            />}
+            (p) => < Dialogs {...store.getDialogsData(myID, p.match.params.id)}/>}
             path='/dialogs/:id' />
+            
           <Route render={
             (p) => < Profile
               addPostObj={

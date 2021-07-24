@@ -4,7 +4,7 @@ import DialogsList from './DialogsList/DialogsList';
 import DialogField from './DialogField/DialogField';
 
 
-const Dialogs = ({ myID, targetID, dialog, dialogsList, newMessageMethods,newMessageValue }) => {
+const Dialogs = ({ myID, targetID, dialog, dialogsList, newMessageMethods, newMessageValue,  }) => {
     return (
         <div className={c.dialogs_wrapper}>
             <DialogsList dialogsList={dialogsList} />

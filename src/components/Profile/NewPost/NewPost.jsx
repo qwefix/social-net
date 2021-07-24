@@ -1,14 +1,14 @@
 import React from 'react';
 import c from './NewPost.module.css';
 
-const NewPost = ({ myID, id, inputValue, add, change }) => {
+const NewPost = ({newPostValue, add, change }) => {
     const newPostTextArea = React.createRef();
     const addPostByButtonClick = () => {
-        newPostTextArea.current.value === '' || add(id, myID)
+        newPostTextArea.current.value === '' || add()
     }
     const addPostByEnter = (e) => {
         if ((e.key === 'Enter' || e.keyCode === 0) && e.ctrlKey) {
-            newPostTextArea.current.value === '' || add(id, myID)
+            newPostTextArea.current.value === '' || add()
         }
     }
 
@@ -19,10 +19,10 @@ const NewPost = ({ myID, id, inputValue, add, change }) => {
                 ref={newPostTextArea}
                 placeholder="what's up? "
                 onChange={() => {
-                    change(newPostTextArea.current.value, id, myID);
+                    change(newPostTextArea.current.value);
                 }}
                 onKeyUp={addPostByEnter}
-                value={inputValue}
+                value={newPostValue}
             >
             </textarea>
             <button onClick={addPostByButtonClick} className={c.button}>Add</button>

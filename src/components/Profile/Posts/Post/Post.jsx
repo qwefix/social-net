@@ -3,16 +3,16 @@ import c from './Post.module.css';
 import likeImg from './like.png';
 import { NavLink } from 'react-router-dom';
 
-const Post = ({ post: { ava, likes, content, authorId, name } }) => {
+const Post = ({ post: { ava, likes, content, authorID, name } }) => {
     return (
         <div className={c.post}>
 
-            <NavLink to={`/profile/${authorId}`} className={c.ava}>
+            <NavLink to={`/profile/${authorID}`} className={c.ava}>
                 <img src={ava} alt="avatar" />
             </NavLink>
 
             <div className={c.content}>
-                <NavLink to={`/profile/${authorId}`} className={c.user_name}>
+                <NavLink to={`/profile/${authorID}`} className={c.user_name}>
                     {name}
                 </NavLink>
                 <p className={c.text_content}>{content}</p>

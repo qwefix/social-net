@@ -7,7 +7,6 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
-import store from './redux/store';
 
 let myID
 if (localStorage.getItem('idReactSocialNet') === null) {
@@ -17,7 +16,7 @@ if (localStorage.getItem('idReactSocialNet') === null) {
   myID = localStorage.getItem('idReactSocialNet');
 }
 
-function App({ state, methods }) {
+function App({ store }) {
   return (
     <BrowserRouter>
       <div className="app">
@@ -30,30 +29,7 @@ function App({ state, methods }) {
           />
 
           <Route render={
-            (p) => < Profile
-              addPostObj={
-                {
-                  id: p.match.params.id,
-                  myID,
-                  inputValue: state[myID].postInput[p.match.params.id]
-                }
-              }
-              newPostMethods={methods.newPost}
-              ava={state[p.match.params.id].ava}
-              wp={state[p.match.params.id].wp}
-              name={state[p.match.params.id].name}
-              posts={state[p.match.params.id].posts
-                .map(a => {
-                  return {
-                    content: a.content,
-                    likes: a.likes,
-                    authorId: a.author,
-                    ava: state[a.author].ava,
-                    name: state[a.author].name
-                  }
-                })
-              }
-            />}
+            (p) => < Profile {...store.getProfileData(myID, p.match.params.id)} />}
             path='/profile/:id' />
 
           <Route component={Music} path='/music' />

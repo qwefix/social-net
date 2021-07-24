@@ -204,7 +204,25 @@ let store = {
         }
     },
     getProfileData(myID, targetID){
-        return{}
+        return{
+            profileHeaderData:{
+                name:this._state[targetID].name,
+                ava: require(`./${targetID}/ava.jpg`).default,
+                wp: require(`./${targetID}/wp.jpg`).default,
+            },
+            posts:this._state[targetID].posts.map(p=>{
+                return{
+                    content:p.content,
+                    likes:p.likes,
+                    authorID:p.author,
+                    ava: require(`./${p.author}/ava.jpg`).default,
+                    name:this._state[p.author].name
+                }
+            })
+            ,
+            newPostMethods:this._newPostMethods(targetID,myID),
+            newPostValue: this._state[myID].postInput[targetID]||'',
+        }
     }
 
 }

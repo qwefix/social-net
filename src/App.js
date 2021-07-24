@@ -25,9 +25,10 @@ function App({ state, methods }) {
         <Aside myID={myID} />
         <div className='main'>
           <Route render={
-            (p) => < Dialogs {...store.getDialogsData(myID, p.match.params.id)}/>}
-            path='/dialogs/:id' />
-            
+            (p) => < Dialogs {...store.getDialogsData(myID, p.match.params.id)} />}
+            path='/dialogs/:id'
+          />
+
           <Route render={
             (p) => < Profile
               addPostObj={

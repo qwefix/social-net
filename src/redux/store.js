@@ -180,8 +180,6 @@ let store = {
 
     getDialogsData(myID, targetID) {
         return {
-            myID,
-            targetID,
             dialogsList:
                 Object.keys(this._state[myID].dialogs).map(id => {
                     return {
@@ -196,7 +194,8 @@ let store = {
                         ava: require(`./${m.sendBy}/ava.jpg`).default,
                         name: this._state[m.sendBy].name,
                         sendBy: m.sendBy,
-                        content: m.content
+                        content: m.content,
+                        fromMe:m.sendBy===myID,
                     }
                 })
             ,
@@ -204,5 +203,9 @@ let store = {
             newMessageValue: this._state[myID].dialogs[targetID].newMessage || '',
         }
     },
+    getProfileData(myID, targetID){
+        return{}
+    }
+
 }
 export default store

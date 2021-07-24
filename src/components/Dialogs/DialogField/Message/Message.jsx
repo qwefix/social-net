@@ -2,9 +2,9 @@ import React from 'react';
 import c from './Message.module.css';
 import { NavLink } from 'react-router-dom';
 
-const Message = ({ myID, message: { content, sendBy, name, ava } }) => {
+const Message = ({ content, sendBy, name, ava,fromMe } ) => {
     return (
-        <div className={`${c.message} ${sendBy === myID ? c.from_me : ''}`}>
+        <div className={`${c.message} ${fromMe ? c.from_me : ''}`}>
 
             <NavLink className={c.ava} to={`/profile/${sendBy}`}>
                 <div>

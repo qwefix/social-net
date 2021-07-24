@@ -1,7 +1,7 @@
 import React from 'react';
 import c from './NewMessage.module.css';
 
-const NewMessage = ({ myID, targetID, newMessageMethods: { change, add }, newMessageValue }) => {
+const NewMessage = ({ newMessageMethods: { change, add }, newMessageValue }) => {
     const textArea = React.createRef();
 
     function addMessageByEnter(e) {
@@ -9,12 +9,12 @@ const NewMessage = ({ myID, targetID, newMessageMethods: { change, add }, newMes
             textArea.current.value += '\n';
         }
         if ((e.code === 'Enter' || e.keyCode === 0) && !e.ctrlKey) {
-            textArea.current.value === '' || add(myID, targetID);
+            textArea.current.value === '' || add();
             textArea.current.value = ''
         }
     }
     function addMessageByButtonCkick() {
-        textArea.current.value === '' || add(myID, targetID);
+        textArea.current.value === '' || add();
     }
 
 
@@ -28,7 +28,7 @@ const NewMessage = ({ myID, targetID, newMessageMethods: { change, add }, newMes
                 onKeyDown={addMessageByEnter}
                 onChange={(e) => {
                     if(e.nativeEvent.inputType!== "insertLineBreak"){                        
-                        change(textArea.current.value, myID, targetID)
+                        change(textArea.current.value)
                     }
                 }
                 }

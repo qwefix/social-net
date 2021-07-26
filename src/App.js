@@ -27,7 +27,6 @@ function App({ store }) {
             (p) => < Dialogs {...store.getDialogsData(myID, p.match.params.id)} />}
             path='/dialogs/:id'
           />
-
           <Route render={
             (p) => < Profile {...store.getProfileData(myID, p.match.params.id)} />}
             path='/profile/:id' />

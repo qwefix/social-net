@@ -1,14 +1,22 @@
 import React from 'react';
 import c from './NewPost.module.css';
 
-const NewPost = ({newPostValue, add, change }) => {
+const NewPost = ({ newPostValue, dispatch, targetID, myID }) => {
     const newPostTextArea = React.createRef();
     const addPostByButtonClick = () => {
-        newPostTextArea.current.value === '' || add()
-    }
+        newPostTextArea.current.value === '' || dispatch({
+            type: 'ADD-POST',
+            myID,
+            targetID
+        })
+    };
     const addPostByEnter = (e) => {
         if ((e.key === 'Enter' || e.keyCode === 0) && e.ctrlKey) {
-            newPostTextArea.current.value === '' || add()
+            newPostTextArea.current.value === '' || dispatch({
+                type: 'ADD-POST',
+                myID,
+                targetID
+            })
         }
     }
 
@@ -19,7 +27,12 @@ const NewPost = ({newPostValue, add, change }) => {
                 ref={newPostTextArea}
                 placeholder="what's up? "
                 onChange={() => {
-                    change(newPostTextArea.current.value);
+                    dispatch({
+                        type: 'CHANGE-POST',
+                        content: newPostTextArea.current.value,
+                        myID,
+                        targetID
+                    });
                 }}
                 onKeyUp={addPostByEnter}
                 value={newPostValue}

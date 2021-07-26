@@ -135,51 +135,59 @@ let store = {
             },
         },
     },
+    that: this,
 
-    _exportMethods: {
-        newPostChange(targetID, myID, content) {
-            this._state[myID].postInput[targetID] = content;
-            this._renderUI(this)
-        },
-        newPostAdd(targetID, myID) {
-            this._state[targetID].posts.push({
-                content: this._state[myID].postInput[targetID],
-                likes: 0,
-                author: myID
-            })
-            this._state[myID].postInput[targetID] = ''
-            this._renderUI(this)
-        },
-        newMessageChange(targetID, myID, content) {
-            this._state[myID].dialogs[targetID].newMessage = content;
-            this._renderUI(this)
-        },
-        newMessageAdd(targetID, myID) {
-            let message = {
-                content: this._state[myID].dialogs[targetID].newMessage,
-                sendBy: myID,
-            }
-            this._state[myID].dialogs[targetID].push(message)
-            this._state[targetID].dialogs[myID].push(message)
-            this._state[myID].dialogs[targetID].newMessage = ''
-            this._renderUI(this)
-        }
+    _newPostChange({ targetID, myID, content }) {
+        this._state[myID].postInput[targetID] = content;
+        this._renderUI(this)
     },
-    _newPostMethods(targetID, myID) {
-        return {
-            change: this._exportMethods.newPostChange.bind(this, targetID, myID),
-            add: this._exportMethods.newPostAdd.bind(this, targetID, myID),
-        }
+    _newPostAdd({ targetID, myID }) {
+        this._state[targetID].posts.push({
+            content: this._state[myID].postInput[targetID],
+            likes: 0,
+            author: myID
+        })
+        this._state[myID].postInput[targetID] = ''
+        this._renderUI(this)
     },
-    _newMessageMethods(targetID, myID) {
-        return {
-            change: this._exportMethods.newMessageChange.bind(this, targetID, myID),
-            add: this._exportMethods.newMessageAdd.bind(this, targetID, myID),
+    _newMessageChange({ targetID, myID, content }) {
+        this._state[myID].dialogs[targetID].newMessage = content;
+        this._renderUI(this)
+    },
+    _newMessageAdd({ targetID, myID }) {
+        let message = {
+            content: this._state[myID].dialogs[targetID].newMessage,
+            sendBy: myID,
+        }
+        this._state[myID].dialogs[targetID].push(message)
+        this._state[targetID].dialogs[myID].push(message)
+        this._state[myID].dialogs[targetID].newMessage = ''
+        this._renderUI(this)
+
+    },
+    dispatch(action) {
+        switch (action.type) {
+            case 'CHANGE-POST':
+                this._newPostChange(action)
+                break;
+            case 'ADD-POST':
+                this._newPostAdd(action)
+                break;
+            case 'CHANGE-MESSAGE':
+                this._newMessageChange(action)
+                break;
+            case 'ADD-MESSAGE':
+                this._newMessageAdd(action)
+                break;
+            default:
+                break;
         }
     },
 
     getDialogsData(myID, targetID) {
         return {
+            myID,
+            targetID,
             dialogsList:
                 Object.keys(this._state[myID].dialogs).map(id => {
                     return {
@@ -195,33 +203,35 @@ let store = {
                         name: this._state[m.sendBy].name,
                         sendBy: m.sendBy,
                         content: m.content,
-                        fromMe:m.sendBy===myID,
+                        fromMe: m.sendBy === myID,
                     }
                 })
             ,
-            newMessageMethods: this._newMessageMethods(targetID, myID),
+            dispatch: this.dispatch.bind(this),
             newMessageValue: this._state[myID].dialogs[targetID].newMessage || '',
         }
     },
-    getProfileData(myID, targetID){
-        return{
-            profileHeaderData:{
-                name:this._state[targetID].name,
+    getProfileData(myID, targetID) {
+        return {
+            myID,
+            targetID,
+            profileHeaderData: {
+                name: this._state[targetID].name,
                 ava: require(`./${targetID}/ava.jpg`).default,
                 wp: require(`./${targetID}/wp.jpg`).default,
             },
-            posts:this._state[targetID].posts.map(p=>{
-                return{
-                    content:p.content,
-                    likes:p.likes,
-                    authorID:p.author,
+            posts: this._state[targetID].posts.map(p => {
+                return {
+                    content: p.content,
+                    likes: p.likes,
+                    authorID: p.author,
                     ava: require(`./${p.author}/ava.jpg`).default,
-                    name:this._state[p.author].name
+                    name: this._state[p.author].name
                 }
             })
             ,
-            newPostMethods:this._newPostMethods(targetID,myID),
-            newPostValue: this._state[myID].postInput[targetID]||'',
+            dispatch: this.dispatch.bind(this),
+            newPostValue: this._state[myID].postInput[targetID] || '',
         }
     }
 

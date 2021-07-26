@@ -3,7 +3,7 @@ import c from './DialogField.module.css';
 import Message from './Message/Message';
 import NewMessage from './NewMessage/NewMessage';
 
-const DialogField = ({ dialog, newMessageMethods, newMessageValue }) => {
+const DialogField = ({ dialog, dispatch, newMessageValue,myID,targetID }) => {
     return (
         <div className={c.mainWrapper}>
             <div className={c.wrapper}>
@@ -12,7 +12,9 @@ const DialogField = ({ dialog, newMessageMethods, newMessageValue }) => {
                 </div>
             </div>
             <NewMessage
-                newMessageMethods={newMessageMethods}
+                targetID={targetID}
+                myID={myID}
+                dispatch={dispatch}
                 newMessageValue={newMessageValue}
             />
         </div>

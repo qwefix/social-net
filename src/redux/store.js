@@ -1,8 +1,6 @@
 let store = {
     _renderUI() { console.log('no observer') },
-    takeRenderFunction(observer) {
-        this._renderUI = observer
-    },
+    takeRenderFunction(observer) { this._renderUI = observer },
     _state: {
         0: {
             "name": "Daria Bazhenova",
@@ -135,49 +133,56 @@ let store = {
             },
         },
     },
-    that: this,
+    _methods: {
+        newPost: {
+            add({ targetID, myID }) {
+                this._state[targetID].posts.push({
+                    content: this._state[myID].postInput[targetID],
+                    likes: 0,
+                    author: myID
+                })
+                this._state[myID].postInput[targetID] = ''
+                this._renderUI(this)
+            },
+            change({ targetID, myID, content }) {
+                this._state[myID].postInput[targetID] = content;
+                this._renderUI(this)
+            },
+        },
+        newMessage: {
+            change({ targetID, myID, content }) {
+                this._state[myID].dialogs[targetID].newMessage = content;
+                this._renderUI(this)
+            },
+            add({ targetID, myID }) {
+                let message = {
+                    content: this._state[myID].dialogs[targetID].newMessage,
+                    sendBy: myID,
+                }
+                this._state[myID].dialogs[targetID].push(message)
+                this._state[targetID].dialogs[myID].push(message)
+                this._state[myID].dialogs[targetID].newMessage = ''
+                this._renderUI(this)
 
-    _newPostChange({ targetID, myID, content }) {
-        this._state[myID].postInput[targetID] = content;
-        this._renderUI(this)
-    },
-    _newPostAdd({ targetID, myID }) {
-        this._state[targetID].posts.push({
-            content: this._state[myID].postInput[targetID],
-            likes: 0,
-            author: myID
-        })
-        this._state[myID].postInput[targetID] = ''
-        this._renderUI(this)
-    },
-    _newMessageChange({ targetID, myID, content }) {
-        this._state[myID].dialogs[targetID].newMessage = content;
-        this._renderUI(this)
-    },
-    _newMessageAdd({ targetID, myID }) {
-        let message = {
-            content: this._state[myID].dialogs[targetID].newMessage,
-            sendBy: myID,
+            },
         }
-        this._state[myID].dialogs[targetID].push(message)
-        this._state[targetID].dialogs[myID].push(message)
-        this._state[myID].dialogs[targetID].newMessage = ''
-        this._renderUI(this)
+    },
+    _get: {
 
     },
     dispatch(action) {
         switch (action.type) {
             case 'CHANGE-POST':
-                this._newPostChange(action)
+                this._methods.newPost.change.call(this, action)
                 break;
             case 'ADD-POST':
-                this._newPostAdd(action)
+                this._methods.newPost.add.call(this, action)
                 break;
             case 'CHANGE-MESSAGE':
-                this._newMessageChange(action)
+                this._methods.newMessage.change.call(this, action)
                 break;
             case 'ADD-MESSAGE':
-                this._newMessageAdd(action)
+                this._methods.newMessage.add.call(this, action)
                 break;
             default:
                 break;

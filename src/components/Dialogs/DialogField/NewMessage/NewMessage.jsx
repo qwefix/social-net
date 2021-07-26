@@ -1,7 +1,7 @@
 import React from 'react';
 import c from './NewMessage.module.css';
 
-const NewMessage = ({ dispatch, newMessageValue,myID,targetID }) => {
+const NewMessage = ({ dispatch, newMessageValue }) => {
     const textArea = React.createRef();
 
     function addMessageByEnter(e) {
@@ -11,8 +11,6 @@ const NewMessage = ({ dispatch, newMessageValue,myID,targetID }) => {
         if ((e.code === 'Enter' || e.keyCode === 0) && !e.ctrlKey) {
             textArea.current.value === '' ||dispatch({
                 type:'ADD-MESSAGE',
-                myID,
-                targetID,
             });
             textArea.current.value = ''
         }
@@ -20,8 +18,6 @@ const NewMessage = ({ dispatch, newMessageValue,myID,targetID }) => {
     function addMessageByButtonCkick() {
         textArea.current.value === '' || dispatch({
             type:'ADD-MESSAGE',
-            myID,
-            targetID,
         });
     }
 
@@ -39,8 +35,6 @@ const NewMessage = ({ dispatch, newMessageValue,myID,targetID }) => {
                         dispatch({
                             type:'CHANGE-MESSAGE',
                             content:textArea.current.value,
-                            myID,
-                            targetID,
                         })
                     }
                 }

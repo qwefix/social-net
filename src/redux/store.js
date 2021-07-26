@@ -1,5 +1,5 @@
 let store = {
-    _renderUI() { console.log('no observer') },
+    _renderUI() { console.warn('no observer(render) function') },
     takeRenderFunction(observer) { this._renderUI = observer },
     _state: {
         0: {
@@ -144,13 +144,13 @@ let store = {
                 this._state[myID].postInput[targetID] = ''
                 this._renderUI(this)
             },
-            change({ targetID, myID, content }) {
+            change({ targetID, myID }, { content }) {
                 this._state[myID].postInput[targetID] = content;
                 this._renderUI(this)
             },
         },
         newMessage: {
-            change({ targetID, myID, content }) {
+            change({ targetID, myID }, { content }) {
                 this._state[myID].dialogs[targetID].newMessage = content;
                 this._renderUI(this)
             },
@@ -170,19 +170,19 @@ let store = {
     _get: {
 
     },
-    dispatch(action) {
+    dispatch(IDs, action) {
         switch (action.type) {
             case 'CHANGE-POST':
-                this._methods.newPost.change.call(this, action)
+                this._methods.newPost.change.call(this, IDs, action)
                 break;
             case 'ADD-POST':
-                this._methods.newPost.add.call(this, action)
+                this._methods.newPost.add.call(this, IDs, action)
                 break;
             case 'CHANGE-MESSAGE':
-                this._methods.newMessage.change.call(this, action)
+                this._methods.newMessage.change.call(this, IDs, action)
                 break;
             case 'ADD-MESSAGE':
-                this._methods.newMessage.add.call(this, action)
+                this._methods.newMessage.add.call(this, IDs, action)
                 break;
             default:
                 break;
@@ -191,8 +191,6 @@ let store = {
 
     getDialogsData(myID, targetID) {
         return {
-            myID,
-            targetID,
             dialogsList:
                 Object.keys(this._state[myID].dialogs).map(id => {
                     return {
@@ -212,14 +210,12 @@ let store = {
                     }
                 })
             ,
-            dispatch: this.dispatch.bind(this),
+            dispatch: this.dispatch.bind(this, { myID, targetID, }),
             newMessageValue: this._state[myID].dialogs[targetID].newMessage || '',
         }
     },
     getProfileData(myID, targetID) {
         return {
-            myID,
-            targetID,
             profileHeaderData: {
                 name: this._state[targetID].name,
                 ava: require(`./${targetID}/ava.jpg`).default,
@@ -235,7 +231,7 @@ let store = {
                 }
             })
             ,
-            dispatch: this.dispatch.bind(this),
+            dispatch: this.dispatch.bind(this, { myID, targetID }),
             newPostValue: this._state[myID].postInput[targetID] || '',
         }
     }

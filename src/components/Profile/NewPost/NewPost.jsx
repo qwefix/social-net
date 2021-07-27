@@ -1,18 +1,16 @@
 import React from 'react';
+import { actionCreator } from '../../../redux/store';
 import c from './NewPost.module.css';
 
-const NewPost = ({ newPostValue, dispatch, }) => {
+const NewPost = ({ newPostValue, dispatch,IDs }) => {
     const newPostTextArea = React.createRef();
+    
     const addPostByButtonClick = () => {
-        newPostTextArea.current.value === '' || dispatch({
-            type: 'ADD-POST',
-        })
+        newPostTextArea.current.value === '' || dispatch(actionCreator.newPost.add(IDs));
     };
     const addPostByEnter = (e) => {
         if ((e.key === 'Enter' || e.keyCode === 0) && e.ctrlKey) {
-            newPostTextArea.current.value === '' || dispatch({
-                type: 'ADD-POST',
-            })
+            newPostTextArea.current.value === '' || dispatch(actionCreator.newPost.add(IDs));
         }
     }
 
@@ -23,10 +21,7 @@ const NewPost = ({ newPostValue, dispatch, }) => {
                 ref={newPostTextArea}
                 placeholder="what's up? "
                 onChange={() => {
-                    dispatch({
-                        type: 'CHANGE-POST',
-                        content: newPostTextArea.current.value,
-                    });
+                    dispatch(actionCreator.newPost.change(IDs,newPostTextArea.current.value));
                 }}
                 onKeyUp={addPostByEnter}
                 value={newPostValue}

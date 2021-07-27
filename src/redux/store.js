@@ -1,4 +1,9 @@
-let store = {
+const NEW_POST_ADD = 'NEW_ADD-POST';
+const NEW_POST_CHANGE = 'NEW_CHANGE-POST';
+const NEW_MESSAGE_ADD = 'NEW_ADD-MESSAGE';
+const NEW_MESSAGE_CHANGE = 'NEW_CHANGE-MESSAGE';
+
+const store = {
     _renderUI() { console.warn('no observer(render) function') },
     takeRenderFunction(observer) { this._renderUI = observer },
     _state: {
@@ -144,13 +149,13 @@ let store = {
                 this._state[myID].postInput[targetID] = ''
                 this._renderUI(this)
             },
-            change({ targetID, myID }, { content }) {
+            change({ targetID, myID, content }) {
                 this._state[myID].postInput[targetID] = content;
                 this._renderUI(this)
             },
         },
         newMessage: {
-            change({ targetID, myID }, { content }) {
+            change({ targetID, myID, content }) {
                 this._state[myID].dialogs[targetID].newMessage = content;
                 this._renderUI(this)
             },
@@ -170,19 +175,19 @@ let store = {
     _get: {
 
     },
-    dispatch(IDs, action) {
+    dispatch(action) {
         switch (action.type) {
-            case 'CHANGE-POST':
-                this._methods.newPost.change.call(this, IDs, action)
+            case NEW_POST_CHANGE:
+                this._methods.newPost.change.call(this, action)
                 break;
-            case 'ADD-POST':
-                this._methods.newPost.add.call(this, IDs, action)
+            case NEW_POST_ADD:
+                this._methods.newPost.add.call(this, action)
                 break;
-            case 'CHANGE-MESSAGE':
-                this._methods.newMessage.change.call(this, IDs, action)
+            case NEW_MESSAGE_CHANGE:
+                this._methods.newMessage.change.call(this, action)
                 break;
-            case 'ADD-MESSAGE':
-                this._methods.newMessage.add.call(this, IDs, action)
+            case NEW_MESSAGE_ADD:
+                this._methods.newMessage.add.call(this, action)
                 break;
             default:
                 break;
@@ -191,6 +196,10 @@ let store = {
 
     getDialogsData(myID, targetID) {
         return {
+            IDs: {
+                myID,
+                targetID,
+            },
             dialogsList:
                 Object.keys(this._state[myID].dialogs).map(id => {
                     return {
@@ -210,12 +219,16 @@ let store = {
                     }
                 })
             ,
-            dispatch: this.dispatch.bind(this, { myID, targetID, }),
+            dispatch: this.dispatch.bind(this),
             newMessageValue: this._state[myID].dialogs[targetID].newMessage || '',
         }
     },
     getProfileData(myID, targetID) {
         return {
+            IDs: {
+                myID,
+                targetID,
+            },
             profileHeaderData: {
                 name: this._state[targetID].name,
                 ava: require(`./${targetID}/ava.jpg`).default,
@@ -231,10 +244,39 @@ let store = {
                 }
             })
             ,
-            dispatch: this.dispatch.bind(this, { myID, targetID }),
+            dispatch: this.dispatch.bind(this),
             newPostValue: this._state[myID].postInput[targetID] || '',
         }
     }
 
 }
 export default store
+
+export const actionCreator = {
+    newMessage: {
+        change: ({ myID, targetID }, value) => ({
+            type: NEW_MESSAGE_CHANGE,
+            content: value,
+            myID,
+            targetID,
+        }),
+        add: ({ myID, targetID }) => ({
+            type: NEW_MESSAGE_ADD,
+            myID,
+            targetID,
+        })
+    },
+    newPost: {
+        change: ({ myID, targetID }, value) => ({
+            type: NEW_POST_CHANGE,
+            content: value,
+            myID,
+            targetID,
+        }),
+        add: ({ myID, targetID }) => ({
+            type: NEW_POST_ADD,
+            myID,
+            targetID,
+        }),
+    }
+}

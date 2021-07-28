@@ -8,27 +8,19 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
 
-let myID
-if (localStorage.getItem('idReactSocialNet') === null) {
-  localStorage.setItem('idReactSocialNet', '0');
-  myID = '0';
-} else {
-  myID = localStorage.getItem('idReactSocialNet');
-}
-
 function App({ store }) {
   return (
     <BrowserRouter>
       <div className="app">
         <Header />
-        <Aside myID={myID} />
+        <Aside {...store.getAsideData()} />
         <div className='main'>
           <Route render={
-            (p) => < Dialogs {...store.getDialogsData(myID, p.match.params.id)} />}
+            (p) => < Dialogs {...store.getDialogsData(p.match.params.id)} />}
             path='/dialogs/:id'
           />
           <Route render={
-            (p) => < Profile {...store.getProfileData(myID, p.match.params.id)} />}
+            (p) => < Profile {...store.getProfileData(p.match.params.id)} />}
             path='/profile/:id' />
 
           <Route component={Music} path='/music' />

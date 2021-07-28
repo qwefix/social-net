@@ -1,3 +1,6 @@
+import dialogReducer from "./reducers/dialogs";
+import profilesReducer from "./reducers/profiles";
+
 const NEW_POST_ADD = 'NEW_ADD-POST';
 const NEW_POST_CHANGE = 'NEW_CHANGE-POST';
 const NEW_MESSAGE_ADD = 'NEW_ADD-MESSAGE';
@@ -7,7 +10,7 @@ const store = {
     _renderUI() { console.warn('no observer(render) function') },
     takeRenderFunction(observer) { this._renderUI = observer },
     _state: {
-        myID: 0,
+        myID: '0',
         profiles: {
             0: {
                 "name": "Daria Bazhenova",
@@ -94,56 +97,10 @@ const store = {
             ]
         },
     },
-
-    _methods: {
-        newPost: {
-            add({ targetID }) {
-                this._state.profiles[targetID].posts.push({
-                    content: this._state.profiles[targetID].postInput,
-                    likes: 0,
-                    author: this._state.myID
-                })
-                this._state.profiles[targetID].postInput = ''
-                this._renderUI(this)
-            },
-            change({ targetID, content }) {
-                this._state.profiles[targetID].postInput = content;
-                this._renderUI(this)
-            },
-        },
-        newMessage: {
-            change({ targetID, content }) {
-                this._state.dialogs[targetID].newMessage = content;
-                this._renderUI(this)
-            },
-            add({ targetID }) {
-                let message = {
-                    content: this._state.dialogs[targetID].newMessage,
-                    sendBy: this._state.myID,
-                }
-                this._state.dialogs[targetID].push(message);
-                this._state.dialogs[targetID].newMessage = ''
-                this._renderUI(this)
-            },
-        }
-    },
     dispatch(action) {
-        switch (action.type) {
-            case NEW_POST_CHANGE:
-                this._methods.newPost.change.call(this, action)
-                break;
-            case NEW_POST_ADD:
-                this._methods.newPost.add.call(this, action)
-                break;
-            case NEW_MESSAGE_CHANGE:
-                this._methods.newMessage.change.call(this, action)
-                break;
-            case NEW_MESSAGE_ADD:
-                this._methods.newMessage.add.call(this, action)
-                break;
-            default:
-                break;
-        }
+        this._state.dialogs = dialogReducer(this._state.dialogs, action);
+        this._state.profiles = profilesReducer(this._state.profiles, action)
+        this._renderUI(store)
     },
 
     getAsideData() { return { myID: this._state.myID } },
@@ -151,6 +108,7 @@ const store = {
         return {
             IDs: {
                 targetID,
+                myID: this._state.myID,
             },
             dialogsList:
                 Object.keys(this._state.dialogs).map(id => {
@@ -179,6 +137,7 @@ const store = {
         return {
             IDs: {
                 targetID,
+                myID: this._state.myID,
             },
             profileHeaderData: {
                 name: this._state.profiles[targetID].name,

@@ -73,15 +73,15 @@
 }
 .arrow{
     top:0;
-    left: -.75rem;
+    left: -1rem;
     width: 0; 
     height: 0; 
-    border-right: 1.5rem solid transparent;
-    border-left: 1.5rem solid transparent;
-    border-top: 1.5rem solid white;
+    border-right: 1rem solid transparent;
+    border-left: 1rem solid transparent;
+    border-top: 1rem solid white;
     position: absolute;
 }
 .from_me .arrow{
     left:unset;
-    right: -.75rem;
+    right: -1rem;
 }

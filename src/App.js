@@ -9,18 +9,23 @@ import Settings from './components/Settings/Settings';
 import News from './components/News/News';
 
 function App({ store }) {
+
   return (
     <BrowserRouter>
       <div className="app">
         <Header />
-        <Aside {...store.getState().aside} />
+        <Aside {...store.getAsideData()} />
         <div className='main'>
           <Route render={
-            (p) => < Dialogs {...store.getState().dialogs} />}
+            (p) => < Dialogs
+              {...store.getState().dialogs}
+              targetID={p.match.params.id}
+              dispatch={store.dispatch.bind(store)}
+            />}
             path='/dialogs/:id'
           />
           <Route render={
-            (p) => < Profile {...store.getState().profiles} />}
+            (p) => < Profile {...store.getProfileData(p.match.params.id)} />}
             path='/profile/:id' />
 
           <Route component={Music} path='/music' />

@@ -37,15 +37,18 @@ export default function dialogReducer(st = initialState, a) {
     Object.assign(state, st);
     switch (a.type) {
         case NEW_MESSAGE_CHANGE:
-            state[a.targetID].newMessage = a.content;
+            state.dialogField[a.targetID].newMessageValue = a.content;
             return state
         case NEW_MESSAGE_ADD:
             let message = {
-                content: state[a.targetID].newMessage,
+                ava: require(`../${a.myID}/ava.jpg`).default,
+                name: state.myName,
+                content: state.dialogField[a.targetID].newMessageValue,
                 sendBy: a.myID,
+                fromMe: true,
             }
-            state[a.targetID].push(message);
-            state[a.targetID].newMessage = ''
+            state.dialogField[a.targetID].dialog.push(message);
+            state.dialogField[a.targetID].newMessageValue = ''
             return state;
         default:
             return state;

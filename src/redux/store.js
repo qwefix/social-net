@@ -8,7 +8,7 @@ const NEW_MESSAGE_CHANGE = 'NEW_CHANGE-MESSAGE';
 
 const store = {
     _renderUI() { console.warn('no observer(render) function') },
-    takeRenderFunction(observer) { this._renderUI = observer },
+    subscribe(observer) { this._renderUI = observer },
     _state: {
         myID: '0',
         profiles: {
@@ -67,35 +67,78 @@ const store = {
             }
         },
         dialogs: {
-            1: [
+            myName: "Daria Bazhenova",
+            myID: '0',
+            "dialogsList": [
                 {
-                    content: "hello",
-                    sendBy: "1"
+                    ava: require(`./${1}/ava.jpg`).default,
+                    "name": "General grievous",
+                    "id": "1"
                 },
                 {
-                    content: "hello there",
-                    sendBy: "0"
-                },
-                {
-                    content: "you are tearing me apart",
-                    sendBy: "1"
+                    ava: require(`./${2}/ava.jpg`).default,
+                    "name": "General Kenobi",
+                    "id": "2"
                 }
             ],
-            2: [
-                {
-                    content: "hello",
-                    sendBy: "0"
+            "dialogField": {
+                1: {
+                    "newMessageValue": "",
+                    dialog: [
+                        {
+                            ava: require(`./${1}/ava.jpg`).default,
+                            "name": "General grievous",
+                            "sendBy": "1",
+                            "content": "hello",
+                            "fromMe": false
+                        },
+                        {
+                            ava: require(`./${0}/ava.jpg`).default,
+                            "name": "Daria Bazhenova",
+                            "sendBy": "0",
+                            "content": "hello there",
+                            "fromMe": true
+                        },
+                        {
+                            ava: require(`./${1}/ava.jpg`).default,
+                            "name": "General grievous",
+                            "sendBy": "1",
+                            "content": "you are tearing me apart",
+                            "fromMe": false
+                        }
+                    ],
                 },
-                {
-                    content: "teach me to be jedai",
-                    sendBy: "0"
+                2: {
+                    "newMessageValue": "",
+                    dialog: [
+                        {
+                            ava: require(`./${0}/ava.jpg`).default,
+                            "name": "Daria Bazhenova",
+                            "sendBy": "0",
+                            "content": "hello",
+                            "fromMe": true
+                        },
+                        {
+                            ava: require(`./${0}/ava.jpg`).default,
+                            "name": "Daria Bazhenova",
+                            "sendBy": "0",
+                            "content": "teach me to be jedai",
+                            "fromMe": true
+                        },
+                        {
+                            ava: require(`./${2}/ava.jpg`).default,
+                            "name": "General Kenobi",
+                            "sendBy": "2",
+                            "content": "send to grievous 'hello there'",
+                            "fromMe": false
+                        }
+                    ],
                 },
-                {
-                    content: "send to grievous 'hello there'",
-                    sendBy: "2"
-                }
-            ]
+            },
         },
+    },
+    getState() {
+        return this._state
     },
     dispatch(action) {
         this._state.dialogs = dialogReducer(this._state.dialogs, action);
@@ -104,35 +147,35 @@ const store = {
     },
 
     getAsideData() { return { myID: this._state.myID } },
-    getDialogsData(targetID) {
-        return {
-            IDs: {
-                targetID,
-                myID: this._state.myID,
-            },
-            dialogsList:
-                Object.keys(this._state.dialogs).map(id => {
-                    return {
-                        ava: require(`./${id}/ava.jpg`).default,
-                        name: this._state.profiles[id].name,
-                        id: id,
-                    }
-                }),
-            dialog:
-                this._state.dialogs[targetID].map(m => {
-                    return {
-                        ava: require(`./${m.sendBy}/ava.jpg`).default,
-                        name: this._state.profiles[m.sendBy].name,
-                        sendBy: m.sendBy,
-                        content: m.content,
-                        fromMe: m.sendBy === this._state.myID,
-                    }
-                })
-            ,
-            dispatch: this.dispatch.bind(this),
-            newMessageValue: this._state.dialogs[targetID].newMessage || '',
-        }
-    },
+    // getDialogsData(targetID) {
+    //     return {
+    //         IDs: {
+    //             targetID,
+    //             myID: this._state.myID,
+    //         },
+    //         dialogsList:
+    //             Object.keys(this._state.dialogs).map(id => {
+    //                 return {
+    //                     ava: require(`./${id}/ava.jpg`).default,
+    //                     name: this._state.profiles[id].name,
+    //                     id: id,
+    //                 }
+    //             }),
+    //         dialog:
+    //             this._state.dialogs[targetID].map(m => {
+    //                 return {
+    //                     ava: require(`./${m.sendBy}/ava.jpg`).default,
+    //                     name: this._state.profiles[m.sendBy].name,
+    //                     sendBy: m.sendBy,
+    //                     content: m.content,
+    //                     fromMe: m.sendBy === this._state.myID,
+    //                 }
+    //             })
+    //         ,
+    //         dispatch: this.dispatch.bind(this),
+    //         newMessageValue: this._state.dialogs[targetID].newMessage || '',
+    //     }
+    // },
     getProfileData(targetID) {
         return {
             IDs: {

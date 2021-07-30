@@ -4,7 +4,6 @@ import { actionCreator } from '../../../../redux/store'
 
 const NewMessage = ({ dispatch, newMessageValue, IDs }) => {
     const textArea = React.createRef();
-
     function addMessageByEnter(e) {
         if ((e.code === 'Enter' || e.keyCode === 0) && e.ctrlKey) {
             textArea.current.value += '\n';

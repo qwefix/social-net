@@ -1,5 +1,5 @@
 import './index.css';
-import store from './redux/redux-store';
+import store from './redux/store';
 import renderUI from './renderUI';
 
 store.subscribe(renderUI);

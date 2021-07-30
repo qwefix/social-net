@@ -1,6 +1,6 @@
 import './index.css';
-import store from './redux/store';
+import store from './redux/redux-store';
 import renderUI from './renderUI';
 
-store.takeRenderFunction(renderUI);
+store.subscribe(renderUI);
 renderUI(store);

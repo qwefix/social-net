@@ -13,14 +13,14 @@ function App({ store }) {
     <BrowserRouter>
       <div className="app">
         <Header />
-        <Aside {...store.getAsideData()} />
+        <Aside {...store.getState().aside} />
         <div className='main'>
           <Route render={
-            (p) => < Dialogs {...store.getDialogsData(p.match.params.id)} />}
+            (p) => < Dialogs {...store.getState().dialogs} />}
             path='/dialogs/:id'
           />
           <Route render={
-            (p) => < Profile {...store.getProfileData(p.match.params.id)} />}
+            (p) => < Profile {...store.getState().profiles} />}
             path='/profile/:id' />
 
           <Route component={Music} path='/music' />

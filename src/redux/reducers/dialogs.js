@@ -1,6 +1,19 @@
 const NEW_MESSAGE_ADD = 'NEW_ADD-MESSAGE';
 const NEW_MESSAGE_CHANGE = 'NEW_CHANGE-MESSAGE';
 
+export const actionCreator = {
+    change: ({ myID, targetID }, value) => ({
+        type: NEW_MESSAGE_CHANGE,
+        content: value,
+        myID,
+        targetID,
+    }),
+    add: ({ myID, targetID }) => ({
+        type: NEW_MESSAGE_ADD,
+        myID,
+        targetID,
+    })
+}
 let initialState = {
     1: [
         {

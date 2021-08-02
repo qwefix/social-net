@@ -1,6 +1,6 @@
 import React from 'react';
 import c from './NewMessage.module.css';
-import { actionCreator } from '../../../../redux/store'
+import { actionCreator } from '../../../../redux/reducers/dialogs'
 
 const NewMessage = ({ dispatch, newMessageValue, IDs }) => {
     const textArea = React.createRef();
@@ -9,12 +9,12 @@ const NewMessage = ({ dispatch, newMessageValue, IDs }) => {
             textArea.current.value += '\n';
         }
         if ((e.code === 'Enter' || e.keyCode === 0) && !e.ctrlKey) {
-            textArea.current.value === '' || dispatch(actionCreator.newMessage.add(IDs));
+            textArea.current.value === '' || dispatch(actionCreator.add(IDs));
             textArea.current.value = ''
         }
     }
     function addMessageByButtonCkick() {
-        textArea.current.value === '' || dispatch(actionCreator.newMessage.add(IDs));
+        textArea.current.value === '' || dispatch(actionCreator.add(IDs));
     }
 
 
@@ -28,7 +28,7 @@ const NewMessage = ({ dispatch, newMessageValue, IDs }) => {
                 onKeyDown={addMessageByEnter}
                 onChange={(e) => {
                     if (e.nativeEvent.inputType !== "insertLineBreak") {
-                        dispatch(actionCreator.newMessage.change(IDs, textArea.current.value));
+                        dispatch(actionCreator.change(IDs, textArea.current.value));
                     }
                 }
                 }

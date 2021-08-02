@@ -14,38 +14,8 @@ export const actionCreator = {
         targetID,
     })
 }
-let initialState = {
-    1: [
-        {
-            content: "hello",
-            sendBy: "1"
-        },
-        {
-            content: "hello there",
-            sendBy: "0"
-        },
-        {
-            content: "you are tearing me apart",
-            sendBy: "1"
-        }
-    ],
-    2: [
-        {
-            content: "hello",
-            sendBy: "0"
-        },
-        {
-            content: "teach me to be jedai",
-            sendBy: "0"
-        },
-        {
-            content: "send to grievous 'hello there'",
-            sendBy: "2"
-        }
-    ]
-}
 
-export default function dialogReducer(st = initialState, a) {
+export default function dialogReducer(st, a) {
     let state = {};
     Object.assign(state, st);
     switch (a.type) {

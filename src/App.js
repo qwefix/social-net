@@ -9,26 +9,26 @@ import Settings from './components/Settings/Settings';
 import News from './components/News/News';
 
 
-function App({ store }) {
+function App({ state, dispatch }) {
   return (
     <BrowserRouter>
       <div className="app">
         <Header />
-        <Aside {...store.getState().aside} />
+        <Aside {...state.aside} />
         <div className='main'>
           <Route render={
             (p) => < Dialogs
-              {...store.getState().dialogs}
+              {...state.dialogs}
               targetID={p.match.params.id}
-              dispatch={store.dispatch.bind(store)}
+              dispatch={dispatch}
             />}
             path='/dialogs/:id'
           />
           <Route render={
             (p) => < Profile
-              {...store.getState().profiles[p.match.params.id]}
+              {...state.profiles[p.match.params.id]}
               targetID={p.match.params.id}
-              dispatch={store.dispatch.bind(store)}
+              dispatch={dispatch}
             />}
             path='/profile/:id' />
 

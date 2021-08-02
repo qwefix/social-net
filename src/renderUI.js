@@ -4,7 +4,10 @@ import ReactDOM from 'react-dom';
 
 function renderUI(store) {
     ReactDOM.render(
-        <App store={store}/>,
+        <App
+            state={store.getState()}
+            dispatch={store.dispatch.bind(store)}
+        />,
         document.getElementById('root')
     );
 }

@@ -7,36 +7,36 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
-
+import StoreContext from './StoreContext';
 
 function App({ state, store }) {
   return (
     <BrowserRouter>
-      <div className="app">
-        <Header />
-        <Aside {...state.aside} />
-        <div className='main'>
-          <Route render={
-            (p) => < Dialogs
-              {...state.dialogs}
-              targetID={p.match.params.id}
-              store={store}
-            />}
-            path='/dialogs/:id'
-          />
-          <Route render={
-            (p) => < Profile
-              {...state.profiles[p.match.params.id]}
-              targetID={p.match.params.id}
-              store={store}
-            />}
-            path='/profile/:id' />
+      <StoreContext.Provider value={store}>
+        <div className="app">
+          <Header />
+          <Aside {...state.aside} />
+          <div className='main'>
+            <Route render={
+              (p) => < Dialogs
+                {...state.dialogs}
+                targetID={p.match.params.id}
+              />}
+              path='/dialogs/:id'
+            />
+            <Route render={
+              (p) => < Profile
+                {...state.profiles[p.match.params.id]}
+                targetID={p.match.params.id}
+              />}
+              path='/profile/:id' />
 
-          <Route component={Music} path='/music' />
-          <Route component={News} path='/news' />
-          <Route component={Settings} path='/settings' />
+            <Route component={Music} path='/music' />
+            <Route component={News} path='/news' />
+            <Route component={Settings} path='/settings' />
+          </div>
         </div>
-      </div>
+      </StoreContext.Provider>
     </BrowserRouter >
   );
 }

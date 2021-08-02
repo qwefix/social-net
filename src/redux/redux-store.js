@@ -12,8 +12,8 @@ const initialState = {
     aside: { myID: '0', },
     profiles: {
         myName: "Daria Bazhenova",
+        myID: "0",
         "0": {
-            myID: "0",
             "profileHeaderData": {
                 "name": "Daria Bazhenova",
                 "ava": require(`./0/ava.jpg`).default,
@@ -52,8 +52,6 @@ const initialState = {
             "newPostValue": ""
         },
         "1": {
-            myID: "0",
-            myName: "Daria Bazhenova",
             "profileHeaderData": {
                 "name": "General grievous",
                 "ava": require(`./1/ava.jpg`).default,
@@ -78,8 +76,6 @@ const initialState = {
             "newPostValue": ""
         },
         "2": {
-            myID: "0",
-            myName: "Daria Bazhenova",
             "profileHeaderData": {
                 "name": "General Kenobi",
                 "ava": require(`./2/ava.jpg`).default,

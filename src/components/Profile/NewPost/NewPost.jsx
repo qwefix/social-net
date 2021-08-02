@@ -1,15 +1,14 @@
 import React from 'react';
-import { actionCreator } from '../../../redux/reducers/profiles';
 import c from './NewPost.module.css';
 
-const NewPost = ({ newPostValue, dispatch,IDs }) => {
+const NewPost = ({ newPostValue, addPost, changePost }) => {
     const newPostTextArea = React.createRef();
     const addPostByButtonClick = () => {
-        newPostTextArea.current.value === '' || dispatch(actionCreator.add(IDs));
+        newPostTextArea.current.value === '' || addPost();
     };
     const addPostByEnter = (e) => {
         if ((e.key === 'Enter' || e.keyCode === 0) && e.ctrlKey) {
-            newPostTextArea.current.value === '' || dispatch(actionCreator.add(IDs));
+            newPostTextArea.current.value === '' || addPost();
         }
     }
 
@@ -20,7 +19,7 @@ const NewPost = ({ newPostValue, dispatch,IDs }) => {
                 ref={newPostTextArea}
                 placeholder="what's up? "
                 onChange={() => {
-                    dispatch(actionCreator.change(IDs,newPostTextArea.current.value));
+                    changePost(newPostTextArea.current.value)
                 }}
                 onKeyUp={addPostByEnter}
                 value={newPostValue}

@@ -1,9 +1,9 @@
 import React from 'react';
 import c from './DialogField.module.css';
 import Message from './Message/Message';
-import NewMessage from './NewMessage/NewMessage';
+import NewMessageContainer from './NewMessage/NewMessageContainer';
 
-const DialogField = ({ dialog, dispatch, newMessageValue, targetID,myID }) => {
+const DialogField = ({ dialog, store,targetID }) => {
     return (
         <div className={c.mainWrapper}>
             <div className={c.wrapper}>
@@ -11,10 +11,9 @@ const DialogField = ({ dialog, dispatch, newMessageValue, targetID,myID }) => {
                     {dialog ? dialog.map((m, i) => <Message {...m} key={i} />) : ''}
                 </div>
             </div>
-            <NewMessage
-                IDs={{targetID,myID}}
-                dispatch={dispatch}
-                newMessageValue={newMessageValue}
+            <NewMessageContainer
+                store={store}
+                targetID={targetID}
             />
         </div>
     )

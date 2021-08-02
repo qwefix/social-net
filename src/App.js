@@ -9,7 +9,7 @@ import Settings from './components/Settings/Settings';
 import News from './components/News/News';
 
 
-function App({ state, dispatch }) {
+function App({ state, store }) {
   return (
     <BrowserRouter>
       <div className="app">
@@ -20,7 +20,7 @@ function App({ state, dispatch }) {
             (p) => < Dialogs
               {...state.dialogs}
               targetID={p.match.params.id}
-              dispatch={dispatch}
+              store={store}
             />}
             path='/dialogs/:id'
           />
@@ -28,7 +28,7 @@ function App({ state, dispatch }) {
             (p) => < Profile
               {...state.profiles[p.match.params.id]}
               targetID={p.match.params.id}
-              dispatch={dispatch}
+              store={store}
             />}
             path='/profile/:id' />
 

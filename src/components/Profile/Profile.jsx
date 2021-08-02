@@ -1,14 +1,14 @@
 import React from 'react';
 import c from './Profile.module.css';
 import Posts from './Posts/Posts';
-import NewPost from './NewPost/NewPost';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
+import NewPostContainer from './NewPost/NewPostContainer';
 
-const Profile = ({ posts, newPostValue, dispatch, profileHeaderData, myID, targetID }) => {
+const Profile = ({ posts, store, profileHeaderData, targetID }) => {
     return (
         <main className={c.profile}>
             <ProfileHeader {...profileHeaderData} />
-            <NewPost dispatch={dispatch} newPostValue={newPostValue} IDs={{myID, targetID}} />
+            <NewPostContainer store={store} targetID={targetID}/>
             <Posts posts={posts} />
         </main>
     )

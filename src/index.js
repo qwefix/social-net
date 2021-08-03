@@ -8,9 +8,7 @@ import { Provider } from 'react-redux';
 function renderUI(store) {
     ReactDOM.render(
         <Provider store={store}>
-            <App
-                state={store.getState()}
-            />
+            <App state={store.getState()} />
         </Provider>,
         document.getElementById('root')
     );

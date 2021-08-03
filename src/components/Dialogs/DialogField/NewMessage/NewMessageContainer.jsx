@@ -1,34 +1,22 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import { actionCreator } from '../../../../redux/reducers/dialogs'
-import StoreContext from '../../../../StoreContext';
 import NewMessage from './NewMessage';
 
-const NewMessageContainer = ({ targetID }) => {
+const mapStateToProps = (state, { IDs }) => {
+    return {
+        newMessageValue: state.dialogs.dialogField[IDs.targetID].newMessageValue
+    }
+};
+const mapDispatchToProps = (dispatch, { IDs }) => {
+    return {
+        addMessage() {
+            dispatch(actionCreator.add(IDs))
+        },
+        changeMessage(text) {
+            dispatch(actionCreator.change(IDs, text))
+        },
+    }
+};
+const NewMessageContainer = connect(mapStateToProps, mapDispatchToProps)(NewMessage)
 
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    const state = store.getState().dialogs
-                    const IDs = { targetID, myID: state.myID }
-
-                    function addMessage() {
-                        store.dispatch(actionCreator.add(IDs))
-                    }
-                    function changeMessage(text) {
-                        store.dispatch(actionCreator.change(IDs, text))
-                    }
-                    return <NewMessage
-                        addMessage={addMessage}
-                        changeMessage={changeMessage}
-                        newMessageValue={state.dialogField[targetID].newMessageValue}
-                    />
-                }
-            }
-
-        </StoreContext.Consumer>
-
-    )
-
-}
 export default NewMessageContainer

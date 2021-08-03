@@ -4,11 +4,11 @@ import Posts from './Posts/Posts';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 import NewPostContainer from './NewPost/NewPostContainer';
 
-const Profile = ({ posts, profileHeaderData, targetID }) => {
+const Profile = ({ posts, profileHeaderData, IDs }) => {
     return (
         <main className={c.profile}>
             <ProfileHeader {...profileHeaderData} />
-            <NewPostContainer targetID={targetID}/>
+            <NewPostContainer IDs={IDs}/>
             <Posts posts={posts} />
         </main>
     )

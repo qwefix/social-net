@@ -23,6 +23,7 @@ export default function profilesReducer(st, a) {
             state[a.targetID].newPostValue = a.content;
             return state
         case NEW_POST_ADD:
+            state[a.targetID] = JSON.parse(JSON.stringify(st[a.targetID]))
             state[a.targetID].posts.push({
                 content: state[a.targetID].newPostValue,
                 likes: 0,
@@ -30,7 +31,7 @@ export default function profilesReducer(st, a) {
                 "ava": require(`../0/ava.jpg`).default,
                 name: state.myName,
             })
-            state[a.targetID].newPostValue = ''
+            state[a.targetID].newPostValue = '';
             return state
         default:
             return state

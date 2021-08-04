@@ -15,7 +15,7 @@ export const actionCreator = {
     }),
 }
 
-export default function profilesReducer(st, a) {
+export default function profilesReducer(st = {}, a) {
     let state = {};
     Object.assign(state, st)
     switch (a.type) {
@@ -34,6 +34,6 @@ export default function profilesReducer(st, a) {
             state[a.targetID].newPostValue = '';
             return state
         default:
-            return state
+            return st
     }
 }

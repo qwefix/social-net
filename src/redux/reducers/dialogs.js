@@ -15,7 +15,7 @@ export const actionCreator = {
     })
 }
 
-export default function dialogReducer(st, a) {
+export default function dialogReducer(st = {}, a) {
     let state = {};
     Object.assign(state, st)
     switch (a.type) {
@@ -35,7 +35,7 @@ export default function dialogReducer(st, a) {
             state.dialogField[a.targetID].newMessageValue = '';
             return state;
         default:
-            return state;
+            return st;
 
     }
 }

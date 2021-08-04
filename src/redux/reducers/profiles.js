@@ -16,23 +16,30 @@ export const actionCreator = {
 }
 
 export default function profilesReducer(st = {}, a) {
-    let state = {};
-    Object.assign(state, st)
     switch (a.type) {
         case NEW_POST_CHANGE:
-            state[a.targetID].newPostValue = a.content;
-            return state
+            return {
+                ...st,
+                [a.targetID]: {
+                    ...st[a.targetID],
+                    newPostValue: a.content,
+                }
+            }
         case NEW_POST_ADD:
-            state[a.targetID] = JSON.parse(JSON.stringify(st[a.targetID]))
-            state[a.targetID].posts.push({
-                content: state[a.targetID].newPostValue,
-                likes: 0,
-                authorID: a.myID,
-                "ava": require(`../0/ava.jpg`).default,
-                name: state.myName,
-            })
-            state[a.targetID].newPostValue = '';
-            return state
+            return {
+                ...st,
+                [a.targetID]: {
+                    ...st[a.targetID],
+                    newPostValue: '',
+                    posts: [...st[a.targetID].posts, {
+                        content: st[a.targetID].newPostValue,
+                        likes: 0,
+                        authorID: a.myID,
+                        "ava": require(`../0/ava.jpg`).default,
+                        name: st.myName,
+                    }]
+                }
+            }
         default:
             return st
     }

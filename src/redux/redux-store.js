@@ -2,11 +2,13 @@ import dialogReducer from "./reducers/dialogs";
 import profilesReducer from "./reducers/profiles";
 import { createStore, combineReducers } from "redux";
 import asideReducer from "./reducers/aside";
+import usersReducer from "./reducers/users";
 
 const rootReducer = combineReducers({
     dialogs: dialogReducer,
     profiles: profilesReducer,
     aside: asideReducer,
+    usersPage: usersReducer,
 })
 const initialState = {
     aside: { myID: '0', },

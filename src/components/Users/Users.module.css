@@ -1,0 +1,82 @@
+.user_list{
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.item{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 12rem 2rem 8rem 1fr 10rem ;
+    grid-template-rows: 3rem 1rem 5rem 3rem;
+    grid-template-areas: 
+    'ava . n n l'
+    'ava . . . l'
+    'ava . s s .'
+    'ava . f . .'
+    ;
+}
+.name{
+    grid-area: n;
+    font-size: 2rem;
+}
+.location{
+    margin-right: .3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    grid-area: l;
+    font-size: 1.3rem;
+    align-items: flex-end;
+    color:rgb(99, 98, 98);
+}
+.follow_button{
+    transition: .5s;
+    user-select: none;
+    cursor: pointer;
+    grid-area: f;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: .5rem;
+}
+.follow{
+    background-color: rgb(104, 165, 165);
+    color: white;
+    font-weight: 550;
+}
+.follow:hover{
+    background-color: rgb(111, 202, 202);
+}
+.unfollow{
+    color: rgb(80, 80, 80);
+    background-color: rgb(175, 175, 175);
+}
+.unfollow:hover{
+    background-color: rgb(155, 155, 155);
+}
+
+.status{
+    font-size: 2rem;
+    color: rgb(41, 40, 40);
+    grid-area: s;
+}
+
+.ava,.ava div{
+    transition: .1s;
+    cursor: pointer;
+    grid-area: ava;
+    height: 12rem;
+    width: 12rem;
+    grid-area: ava;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+}
+.ava img{
+    max-width: 100%;
+    max-height: 100%;
+}

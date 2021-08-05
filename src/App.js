@@ -7,6 +7,7 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
+import UsersContainer from './components/Users/UsersContainer';
 
 function App({ state }) {
   return (
@@ -22,12 +23,15 @@ function App({ state }) {
             />}
             path='/dialogs/:id'
           />
-          <Route render={
-            (p) => < Profile
+          <Route
+            render={(p) => < Profile
               {...state.profiles[p.match.params.id]}
               IDs={{ targetID: p.match.params.id, myID: state.profiles.myID }}
             />}
             path='/profile/:id'
+          />
+          <Route path='/users'
+            render={(p) => <UsersContainer />}
           />
           <Route component={Music} path='/music' />
           <Route component={News} path='/news' />

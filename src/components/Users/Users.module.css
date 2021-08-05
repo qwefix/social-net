@@ -1,7 +1,38 @@
+.main_wrapper{
+    position: relative;
+    height: 100%;
+}
+.user_list_wrapper{
+    height: 95%;
+    flex-grow: 1;
+    overflow-y: scroll;
+    display: block;
+
+}
 .user_list{
     padding: 0 1rem;
     display: flex;
     flex-direction: column;
+}
+.get_users_wrapper{
+    height: 5%;
+    display: flex;
+    justify-content: center;
+}
+.get_users_wrapper>div{
+    width: 10rem;
+    font-size: 2rem;
+    background-color: cornflowerblue;
+    border-radius: .5rem;
+    color: cornsilk;
+    font-weight: 555;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+.get_users_wrapper>div:hover{
+    background-color: rgb(50, 121, 252);
 }
 .item{
     margin-top: 1rem;
@@ -57,7 +88,7 @@
 }
 
 .status{
-    font-size: 2rem;
+    font-size: 1.3rem;
     color: rgb(41, 40, 40);
     grid-area: s;
 }

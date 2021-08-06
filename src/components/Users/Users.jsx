@@ -4,20 +4,24 @@ import { NavLink } from 'react-router-dom'
 import c from './Users.module.css'
 import userPhotoHolder from '../../assets/ph/ava.jpg'
 
-export default function Users({ users, addUsers, follow, unfollow }) {
-    function getUsers() {
-        if (users.length === 0) {
+export default class Users extends React.Component {
+    getUsers=()=> {
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
                 .then(response => {
-                    addUsers(response.data.items)
-                })
-        }
+                    this.props.addUsers(response.data.items)
+                });
     }
-    return (
-        <div className={c.main_wrapper}>
+    constructor(props){
+        super(props);
+        this.getUsers();
+    }
+    
+    render() {
+        return (
+            <div className={c.main_wrapper}>
             <div className={c.user_list_wrapper}>
                 <div className={c.user_list}>
-                    {users.map(a => <div className={c.item} key={a.id}>
+                    {this.props.users.map(a => <div className={c.item} key={a.id}>
                         <div className={c.name}>{a.name}</div>
                         <NavLink className={c.ava} to={`/profile/${a.id}`}>
                             <div>
@@ -27,23 +31,17 @@ export default function Users({ users, addUsers, follow, unfollow }) {
                         {a.followed ?
                             <div
                                 className={`${c.follow_button} ${c.unfollow}`}
-                                onClick={() => unfollow(a.id)}
+                                onClick={() => this.props.unfollow(a.id)}
                             >
                                 unfollow
                             </div>
                             :
                             <div
                                 className={`${c.follow_button} ${c.follow}`}
-                                onClick={() => follow(a.id)}
+                                onClick={() => this.props.follow(a.id)}
                             >
                                 Follow
-                            </div>}
-                        <div
-                            className={`${c.follow_button} ${a.followed ? c.unfollow : c.follow}`}
-                            onClick={a.followed ? () => unfollow(a.id) : () => follow(a.id)}
-                        >
-                            {a.followed ? 'unfollow' : 'Follow'}
-                        </div>
+                            </div>}                       
                         <div className={c.location}>
                             <div>{'a.location.city'}</div>
                             <div>{'a.location.country'}</div>
@@ -55,8 +53,9 @@ export default function Users({ users, addUsers, follow, unfollow }) {
                 </div>
             </div>
             <div className={c.get_users_wrapper}>
-                <div onClick={getUsers}>Get users</div>
+                <div onClick={this.getUsers}>Get users</div>
             </div>
         </div>
-    )
+        )
+    }
 }

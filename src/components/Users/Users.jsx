@@ -11,8 +11,7 @@ export default class Users extends React.Component {
                     this.props.addUsers(response.data.items)
                 });
     }
-    constructor(props){
-        super(props);
+    componentDidMount(){
         this.getUsers();
     }
     

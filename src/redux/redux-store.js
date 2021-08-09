@@ -168,4 +168,5 @@ const initialState = {
 }
 
 let store = createStore(rootReducer, initialState);
+window.store = store
 export default store

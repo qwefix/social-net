@@ -10,6 +10,7 @@ const Aside = (props) => {
                 <NavLink to='/dialogs/1' activeClassName={c.active}>Messages</NavLink>
                 <NavLink to='/news' activeClassName={c.active}>News</NavLink>
                 <NavLink to='/music' activeClassName={c.active}>Music</NavLink>
+                <NavLink to='/users' activeClassName={c.active}>Users</NavLink>
                 <NavLink to='/settings' activeClassName={c.active}>Settings</NavLink>
             </div>
         </aside>)

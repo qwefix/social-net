@@ -15,9 +15,11 @@ const ac = {
         type: UNFOLLOW,
         targetID,
     }),
-    setUsers: (users) => ({
+    getPage: (users, currentPage, totalUsers) => ({
         type: SET_USERS,
-        users
+        users,
+        currentPage,
+        totalUsers
     })
 }
 export { ac }
@@ -47,7 +49,12 @@ export default function usersReducer(state = initialState, action) {
                     } else return a
                 })
             }
-        case SET_USERS: return { ...state, users: [...state.users, ...action.users] }
+        case SET_USERS: return {
+            ...state,
+            currentPage: action.currentPage,
+            users: action.users,
+            totalPages: Math.ceil(action.totalUsers / 4),
+        }
         default:
             return state
     }

@@ -1,9 +1,9 @@
 .main_wrapper{
     position: relative;
-    height: 100%;
+    overflow: hidden;
 }
 .user_list_wrapper{
-    height: 95%;
+    height: 99%;
     flex-grow: 1;
     overflow-y: scroll;
     display: block;
@@ -94,7 +94,6 @@
 }
 
 .ava,.ava div{
-    transition: .1s;
     cursor: pointer;
     grid-area: ava;
     height: 12rem;
@@ -137,11 +136,28 @@
     margin: .1rem;
 }
 .pagination_wrapper>div.clickable{
-    transition: .2s;
     cursor: pointer;
     background-color: rgb(63, 63, 63);
 }
 .pagination_wrapper>div.clickable:hover{
+    transition: .2s;
     background-color: white;
     color: black;
+}
+.spinner{
+    z-index: 2;
+    width: 7rem;
+    height: 7rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.blackout{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(59, 59, 59, 0.712);
+    z-index: 1;
+    transition: .1s;
 }

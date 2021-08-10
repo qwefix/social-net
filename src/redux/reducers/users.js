@@ -1,9 +1,11 @@
-const FOLLOW = "follow";
-const UNFOLLOW = "unfollow";
-const SET_USERS = 'setUsers';
+const FOLLOW = "users_follow";
+const UNFOLLOW = "users_unfollow";
+const SELECT_PAGE = 'users_selectPage';
+const ADD_SPINNER = 'users_spinner_add';
 
 const initialState = {
-    users: []
+    users: [],
+    spinner: true,
 };
 
 const ac = {
@@ -15,12 +17,13 @@ const ac = {
         type: UNFOLLOW,
         targetID,
     }),
-    getPage: (users, currentPage, totalUsers) => ({
-        type: SET_USERS,
-        users,
+    selectPage: (currentPage, responce) => ({
+        type: SELECT_PAGE,
+        users: responce.data.items,
         currentPage,
-        totalUsers
-    })
+        totalUsers: responce.data.totalCount,
+    }),
+    addSpinner: () => ({ type: ADD_SPINNER }),
 }
 export { ac }
 export default function usersReducer(state = initialState, action) {
@@ -49,12 +52,19 @@ export default function usersReducer(state = initialState, action) {
                     } else return a
                 })
             }
-        case SET_USERS: return {
-            ...state,
-            currentPage: action.currentPage,
-            users: action.users,
-            totalPages: Math.ceil(action.totalUsers / 4),
-        }
+        case SELECT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage,
+                users: action.users,
+                totalPages: Math.ceil(action.totalUsers / 10),
+                spinner: false,
+            }
+        case ADD_SPINNER:
+            return {
+                ...state,
+                spinner: true
+            }
         default:
             return state
     }

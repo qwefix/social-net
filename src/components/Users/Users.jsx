@@ -1,29 +1,22 @@
-import * as axios from 'axios'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import c from './Users.module.css'
 import userPhotoHolder from '../../assets/ph/ava.jpg'
+import spinner from '../../assets/spinner.gif';
+
 
 export default class Users extends React.Component {
-    getFirstPage = () => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=4`)
-            .then(response => {
-                this.props.addUsers(response.data.items, 1, Math.ceil(response.data.totalCount / 4));
-            });
-    }
     getPage = (page) => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=4`)
-            .then(response => {
-                this.props.addUsers(response.data.items, page, Math.ceil(response.data.totalCount / 4));
-            });
+        this.props.selectPage(page)
     }
     componentDidMount() {
-        if (!this.props.currentPage) this.getFirstPage();
+        if (!this.props.currentPage) this.getPage(1);
     }
-
     render() {
+        console.log(this.props.spinner)
         return (
             <React.Fragment>
+                {this.props.spinner?<img src={spinner} alt='loading'className={c.spinner}></img>:''}
                 <div className={c.pagination_wrapper}>
                     {this.props.currentPage === 1 ?
                         <React.Fragment>
@@ -75,6 +68,7 @@ export default class Users extends React.Component {
                     }
                 </div>
                 <div className={c.main_wrapper}>
+                    {this.props.spinner ? <div className={c.blackout}/>:''}
                     <div className={c.user_list_wrapper}>
                         <div className={c.user_list}>
                             {this.props.users.map(a => <div className={c.item} key={a.id}>

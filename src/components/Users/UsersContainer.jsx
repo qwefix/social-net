@@ -1,9 +1,11 @@
 import { connect } from "react-redux";
 import { ac } from "../../redux/reducers/users";
 import Users from "./Users";
+import * as axios from 'axios';
 
 const mapState = (state) => {
     return {
+        spinner:state.usersPage.spinner,
         users: state.usersPage.users,
         totalPages: state.usersPage.totalPages,
         currentPage: state.usersPage.currentPage,
@@ -26,8 +28,18 @@ const mapDispatch = (dispatch) => {
         unfollow(targetID) {
             dispatch(ac.unfollow(targetID))
         },
-        addUsers(users, page, totalPgaes) {
-            dispatch(ac.getPage(users, page, totalPgaes))
+        selectPage(page) {
+            dispatch(ac.addSpinner())            
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=10`)
+                .then(response => { 
+                    dispatch(ac.selectPage( page,response))
+                })
+                .catch((r)=>setTimeout(()=>{
+                    console.log(r)
+                    if(r){
+                    this.selectPage(page)
+                    }
+                },1000))        
         }
     }
 }

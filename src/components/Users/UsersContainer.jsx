@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { ac } from "../../redux/reducers/users";
-import Users from "./Users";
+import UsersClass from "./UsersClass";
 import * as axios from 'axios';
 
 const mapState = (state) => {
@@ -43,5 +43,5 @@ const mapDispatch = (dispatch) => {
         }
     }
 }
-const UsersContainer = connect(mapState, mapDispatch)(Users)
+const UsersContainer = connect(mapState, mapDispatch)(UsersClass)
 export default UsersContainer

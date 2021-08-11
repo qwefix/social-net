@@ -2,9 +2,11 @@ const FOLLOW = "users_follow";
 const UNFOLLOW = "users_unfollow";
 const SELECT_PAGE = 'users_selectPage';
 const ADD_SPINNER = 'users_spinner_add';
+const SET_USERS = 'SET_USERS';
 
 const initialState = {
     users: [],
+    currentPage: 1,
     spinner: true,
 };
 
@@ -17,10 +19,13 @@ const ac = {
         type: UNFOLLOW,
         targetID,
     }),
-    selectPage: (currentPage, responce) => ({
+    selectPage: (currentPage) => ({
         type: SELECT_PAGE,
-        users: responce.data.items,
         currentPage,
+    }),
+    setUsers: (responce) => ({
+        type: SET_USERS,
+        users: responce.data.items,
         totalUsers: responce.data.totalCount,
     }),
     addSpinner: () => ({ type: ADD_SPINNER }),
@@ -56,6 +61,10 @@ export default function usersReducer(state = initialState, action) {
             return {
                 ...state,
                 currentPage: action.currentPage,
+            }
+        case SET_USERS:
+            return {
+                ...state,
                 users: action.users,
                 totalPages: Math.ceil(action.totalUsers / 10),
                 spinner: false,

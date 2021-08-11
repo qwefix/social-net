@@ -10,10 +10,10 @@ export default class Users extends React.Component {
         this.props.selectPage(page)
     }
     componentDidMount() {
-        if (!this.props.currentPage) this.getPage(1);
+        if (!this.props.users.length) this.getPage(1);
     }
     render() {
-        console.log(this.props.spinner)
+        console.log(this.props)
         return (
             <React.Fragment>
                 {this.props.spinner?<img src={spinner} alt='loading'className={c.spinner}></img>:''}
@@ -36,7 +36,7 @@ export default class Users extends React.Component {
 
                     {this.props.pagination ?
                         this.pagination = this.props.pagination.map(n => {
-                            if (n > 0 && n <= this.props.totalPages) {
+                            if (n > 0 && (n <= this.props.totalPages||this.props.totalPages===undefined)) {
                                 return (n !== this.props.currentPage ?
                                     <div key={n}
                                         className={c.clickable}

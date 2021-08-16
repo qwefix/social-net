@@ -10,8 +10,8 @@ export default class UsersClass extends React.Component {
         this.props.selectPage(page)
         this.props.setSpinner(true)
         this.lastPromice = page;
-        this.usersPromice = axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=10`)
-        this.usersPromice.then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=10`)
+        .then(response => {
             if (page === this.lastPromice) {
                 this.props.setUsers(response)
                 this.props.setSpinner(false)

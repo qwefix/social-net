@@ -69,14 +69,10 @@ export default function usersReducer(state = initialState, action) {
                 totalPages: Math.ceil(action.totalUsers / 10),
             }
         case SET_SPINNER:
-            if (action.isFetching || action.page === state.currentPage) {
-                return {
-                    ...state,
-                    spinner: action.isFetching
-                }
+            return {
+                ...state,
+                spinner: action.isFetching
             }
-            return { ...state }
-
         default:
             return state
     }

@@ -32,7 +32,6 @@ const ac = {
 }
 export { ac }
 export default function usersReducer(state = initialState, action) {
-    console.log(action)
     switch (action.type) {
         case FOLLOW:
             return {

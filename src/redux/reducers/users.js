@@ -1,7 +1,7 @@
 const FOLLOW = "users_follow";
 const UNFOLLOW = "users_unfollow";
 const SELECT_PAGE = 'users_selectPage';
-const ADD_SPINNER = 'users_spinner_add';
+const SET_SPINNER = 'users_spinner_set';
 const SET_USERS = 'SET_USERS';
 
 const initialState = {
@@ -28,10 +28,11 @@ const ac = {
         users: responce.data.items,
         totalUsers: responce.data.totalCount,
     }),
-    addSpinner: () => ({ type: ADD_SPINNER }),
+    setSpinner: (isFetching, page) => ({ type: SET_SPINNER, isFetching, page }),
 }
 export { ac }
 export default function usersReducer(state = initialState, action) {
+    console.log(action)
     switch (action.type) {
         case FOLLOW:
             return {
@@ -67,13 +68,16 @@ export default function usersReducer(state = initialState, action) {
                 ...state,
                 users: action.users,
                 totalPages: Math.ceil(action.totalUsers / 10),
-                spinner: false,
             }
-        case ADD_SPINNER:
-            return {
-                ...state,
-                spinner: true
+        case SET_SPINNER:
+            if (action.isFetching || action.page === state.currentPage) {
+                return {
+                    ...state,
+                    spinner: action.isFetching
+                }
             }
+            return { ...state }
+
         default:
             return state
     }

@@ -30,16 +30,17 @@ const mapDispatch = (dispatch) => {
         },
         selectPage(page) {
             dispatch(ac.selectPage(page))
-            dispatch(ac.addSpinner())
+            dispatch(ac.setSpinner(true))
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=10`)
                 .then(response => {
                     dispatch(ac.setUsers(response))
+                    dispatch(ac.setSpinner(false,page))
                 })
                 .catch((r) => setTimeout(() => {
                     if (r) {
                         this.selectPage(page)
                     }
-                }, 1000))
+                }, 2000))
         }
     }
 }

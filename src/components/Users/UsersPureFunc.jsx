@@ -2,27 +2,25 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import c from './Users.module.css'
 import userPhotoHolder from '../../assets/ph/ava.jpg'
-import spinner from '../../assets/spinner.gif';
-
+import Spinner from '../common/Spinner/Spinner';
 
 export default function UsersPureFunc(props){
     return <React.Fragment>
-            {props.spinner ? <img src={spinner} alt='loading' className={c.spinner}></img> : ''}
             <div className={c.pagination_wrapper}>
                 {props.currentPage === 1 ?
-                    <React.Fragment>
+                    <>
                         <div title='to first page'>{'|<'}</div>
                         <div title='to previous page'>{'<'}</div>
-                    </React.Fragment>
+                    </>
                     :
-                    <React.Fragment>
+                    <>
                         <div title='to first page'
                             onClick={() => props.selectPage(1)}
                             className={c.clickable}>{'|<'}</div>
                         <div title='to previous page'
                             onClick={() => props.selectPage(props.currentPage - 1)}
                             className={c.clickable}>{'<'}</div>
-                    </React.Fragment>
+                    </>
                 }
 
                 {props.pagination ?
@@ -40,26 +38,26 @@ export default function UsersPureFunc(props){
                         }
                         return <div key={n} />
                     })
-                    : ""
+                    : null
                 }
                 {props.currentPage === props.totalPages ?
-                    <React.Fragment>
+                    <>
                         <div title='to next page'>{'>'}</div>
                         <div title='to last page'>{'>|'}</div>
-                    </React.Fragment>
+                    </>
                     :
-                    <React.Fragment>
+                    <>
                         <div title='to next page'
                             onClick={() => props.selectPage(props.currentPage + 1)}
                             className={c.clickable}>{'>'}</div>
                         <div title='to last page'
                             onClick={() => props.selectPage(props.totalPages)}
                             className={c.clickable}>{'>|'}</div>
-                    </React.Fragment>
+                    </>
                 }
             </div>
             <div className={c.main_wrapper}>
-                {props.spinner ? <div className={c.blackout} /> : ''}
+                {props.spinner ? <Spinner/> : null}
                 <div className={c.user_list_wrapper}>
                     <div className={c.user_list}>
                         {props.users.map(a => <div className={c.item} key={a.id}>

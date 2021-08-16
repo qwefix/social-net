@@ -5,6 +5,7 @@ import userPhotoHolder from '../../assets/ph/ava.jpg'
 import Spinner from '../common/Spinner/Spinner';
 
 export default function UsersPureFunc(props){
+    console.log(props)
     return <React.Fragment>
             <div className={c.pagination_wrapper}>
                 {props.currentPage === 1 ?

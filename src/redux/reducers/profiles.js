@@ -1,7 +1,9 @@
 const NEW_POST_ADD = 'NEW_ADD-POST';
 const NEW_POST_CHANGE = 'NEW_CHANGE-POST';
+const SET_PROFILE = 'SET_PROFILE'
+const SET_SPINNER = 'SET_SPINNER'
 
-export const actionCreator = {
+export const ac = {
     change: ({ myID, targetID }, value) => ({
         type: NEW_POST_CHANGE,
         content: value,
@@ -13,6 +15,14 @@ export const actionCreator = {
         myID,
         targetID,
     }),
+    setProfile: (profileData) => ({
+        type: SET_PROFILE,
+        profileData
+    }),
+    setSpinner: (spinner) => ({
+        type: SET_SPINNER,
+        spinner
+    })
 }
 
 export default function profilesReducer(st = {}, a) {
@@ -39,6 +49,18 @@ export default function profilesReducer(st = {}, a) {
                         name: st.myName,
                     }]
                 }
+            }
+        case SET_PROFILE:
+            return {
+                ...st,
+                headers: {
+                    ...st.headers,
+                    [a.profileData.userId]: a.profileData
+                }
+            }
+        case SET_SPINNER:
+            return {
+                ...st, spinner: a.spinner
             }
         default:
             return st

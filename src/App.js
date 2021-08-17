@@ -2,12 +2,12 @@ import './App.css';
 import { BrowserRouter, Route, } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
-import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import News from './components/News/News';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 function App({ state }) {
   return (
@@ -24,9 +24,8 @@ function App({ state }) {
             path='/dialogs/:id'
           />
           <Route
-            render={(p) => < Profile
-              {...state.profiles[p.match.params.id]}
-              IDs={{ targetID: p.match.params.id, myID: state.profiles.myID }}
+            render={(p) => < ProfileContainer
+              targetID={p.match.params.id}
             />}
             path='/profile/:id'
           />

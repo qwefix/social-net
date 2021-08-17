@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actionCreator } from '../../../redux/reducers/profiles';
+import { ac } from '../../../redux/reducers/profiles';
 import NewPost from './NewPost';
 
 const mapState = (state,{IDs})=>{
@@ -9,8 +9,8 @@ const mapState = (state,{IDs})=>{
 }
 const mapDispatch = (dispatch,{IDs})=>{
     return{
-        changePost(text){dispatch(actionCreator.change(IDs, text))},
-        addPost(){dispatch(actionCreator.add(IDs))}
+        changePost(text){dispatch(ac.change(IDs, text))},
+        addPost(){dispatch(ac.add(IDs))}
     }
 }
 

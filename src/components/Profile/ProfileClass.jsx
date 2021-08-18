@@ -8,9 +8,9 @@ class ProfileClass extends React.Component {
     }
     getUser = (userID) => {
         if (!this.props.headers[this.props.targetID]) {
+            this.props.setSpinner(true)
             axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
                 .then(response => {
-                    this.props.setSpinner(true)
                     this.props.setProfile(response.data)
                     if (this.props.targetID === userID) { this.props.setSpinner(false) }
                 },

@@ -8,7 +8,42 @@
     border-radius: .5rem;
     font-size: 4rem;
     cursor: default;
+    align-items: center;
+}
+.ava{
+    margin-left: .5rem;
+    overflow:hidden;
+    width: 5rem;
+    height: 5rem;
+    border-radius: .3rem;
+    display: flex;
+    background-color: azure;
+    border: .1rem solid black;
+    border-radius: .5rem;
+    align-items: stretch;
+    justify-content: center;
 }
 .image {
     width: 5rem;
+}
+.login{
+    background-color: rgb(75, 75, 75);
+    border-radius: .2rem;
+    font-size: 2rem;
+    transition: .2s;
+}
+.login a{
+    color: white;
+}
+.login:hover,.login:hover a{
+    color: black;
+    background-color: white;
+}
+.logined_user{
+    font-size: 2rem;
+    transition: .2s;
+    display: flex;
+}
+.logined_user a{
+    color: white;
 }

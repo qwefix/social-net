@@ -45,7 +45,6 @@ export default function profilesReducer(st = {}, a) {
                         content: st[a.targetID].newPostValue,
                         likes: 0,
                         authorID: a.myID,
-                        "ava": require(`../0/ava.jpg`).default,
                         name: st.myName,
                     }]
                 }

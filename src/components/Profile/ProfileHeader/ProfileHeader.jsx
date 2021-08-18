@@ -26,11 +26,13 @@ const ProfileHeader = ({ ava, aboutMe, fullName, lookingForAJob, lookingForAJobD
                             {lookingForAJobDescription}
                         </p>
                     </div>
-                    <div className={c.contacts_wrapper}>
-                        contacts
-                        <div className={c.contacts}>
-                            
-                        </div>
+                    <div className={c.contacts}>
+                            {Object.entries(contacts).filter(a => {
+                                console.log(a[1])
+                                return !!a[1]
+                            }).map((item, i) =>
+                                <div key={i}>{item[1]}: {item[0]}</div>
+                            )}
                     </div>
                 </div>
             </div>

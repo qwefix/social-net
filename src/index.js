@@ -14,5 +14,5 @@ function renderUI(store) {
     );
 }
 
-store.subscribe(() => renderUI(store));
+// store.subscribe(() => renderUI(store));
 renderUI(store);

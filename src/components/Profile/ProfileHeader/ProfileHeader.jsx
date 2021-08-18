@@ -1,14 +1,18 @@
 import React from 'react';
 import c from './ProfileHeader.module.css';
+import userPhotoHolder from '../../../assets/ph/ava.jpg'
 
 
 const ProfileHeader = ({ ava, aboutMe, fullName, lookingForAJob, lookingForAJobDescription, contacts }) => {
-    console.log(contacts)
     return (
         <header className={c.header}>
             <div className={c.ava_description} >
                 <div className={c.ava}>
+                    {ava ?
                     <img src={ava} alt="avatar" />
+                    :
+                    <img src={userPhotoHolder} alt="avatar" />
+                    }   
                 </div>
                 <div className={c.info_wrapper}>
                     <div className={c.name}>{fullName}</div>
@@ -27,13 +31,15 @@ const ProfileHeader = ({ ava, aboutMe, fullName, lookingForAJob, lookingForAJobD
                         </p>
                     </div>
                     <div className={c.contacts}>
-                            {Object.entries(contacts).filter(a => {
-                                console.log(a[1])
+                        {contacts? 
+                            Object.entries(contacts).filter(a => {
                                 return !!a[1]
                             }).map((item, i) =>
                                 <div key={i}>{item[1]}: {item[0]}</div>
-                            )}
-                    </div>
+                            )
+                            :null
+                        }
+                    </div>       
                 </div>
             </div>
         </header>

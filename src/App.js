@@ -25,9 +25,9 @@ function App({ state }) {
           />
           <Route
             render={(p) => < ProfileContainer
-              targetID={p.match.params.id}
+              targetID={p.match.params.id || 2}
             />}
-            path='/profile/:id'
+            path='/profile/:id?'
           />
           <Route path='/users'
             render={(p) => <UsersContainer />}

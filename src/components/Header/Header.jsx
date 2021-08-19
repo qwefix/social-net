@@ -6,7 +6,6 @@ import userPhotoHolder from '../../assets/ph/ava.jpg'
 
 
 function Header(props) {
-    console.log(props)
     return (
         <header className={c.header}>
             <img src={logoIcon} alt='logo' className={c.image} />

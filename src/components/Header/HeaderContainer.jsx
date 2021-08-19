@@ -17,6 +17,7 @@ class HeaderContainer extends React.Component {
                 }
             })
     }
+    // componentDidUpdate=()=>{console.log(this.props)}
     render = () => <Header{...this.props.headerData} />
 }
 

@@ -27,6 +27,7 @@ export default function authReducer(state = initialState, action) {
                 isAuth: true,
             }
         case SET_USER_DATA_AUTH:
+            console.log(action.data)
             return {
                 ...state,
                 loginedUser: {

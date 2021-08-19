@@ -23,10 +23,10 @@ const ac = {
         type: SELECT_PAGE,
         currentPage,
     }),
-    setUsers: (responce) => ({
+    setUsers: (data) => ({
         type: SET_USERS,
-        users: responce.data.items,
-        totalUsers: responce.data.totalCount,
+        users: data.items,
+        totalUsers: data.totalCount,
     }),
     setSpinner: (isFetching, page) => ({ type: SET_SPINNER, isFetching, page }),
 }

@@ -1,10 +1,8 @@
 import React from 'react';
 import Header from './Header';
-import * as axios from 'axios';
 import { connect } from 'react-redux';
 import { ac } from '../../redux/reducers/auth';
 import authAPI from '../../api/auth';
-
 
 class HeaderContainer extends React.Component {
     componentDidMount = () => {
@@ -14,7 +12,6 @@ class HeaderContainer extends React.Component {
                     this.props.setUserAuth(data.data);
                     authAPI.getUserInfo(data)
                     .then(data => {
-                        console.log(data)
                         this.props.setUserData(data)
                     })
                 }

@@ -4,21 +4,21 @@ import usersAPI from '../../api/users';
 
 export default class UsersClass extends React.Component {
     follow = (id) => {
-        this.props.setSpinner(true)
+        this.props.setSpinnerFollow(true,id)
         usersAPI.follow(id)
             .then(data => {
                 if (data.resultCode === 0) {
-                    this.props.setSpinner(false)
+                    this.props.setSpinnerFollow(false,id)
                     this.props.follow(id)
                 }
             })
     }
     unfollow = (id) => {
-        this.props.setSpinner(true)
+        this.props.setSpinnerFollow(true,id)
         usersAPI.unfollow(id)
             .then(data => {
                 if (data.resultCode === 0) {
-                    this.props.setSpinner(false)
+                    this.props.setSpinnerFollow(false,id)
                     this.props.unfollow(id)
                 }
             })

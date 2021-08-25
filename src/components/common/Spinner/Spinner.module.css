@@ -1,7 +1,9 @@
 .spinner{
     z-index: 2;
+    max-width: 20%;
+    /* max-height: 50%; */
     width: 7rem;
-    height: 7rem;
+    /* height: 7rem; */
     position: absolute;
     top: 50%;
     left: 50%;

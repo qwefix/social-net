@@ -67,6 +67,10 @@
 .unfollow:hover{
     background-color: rgb(155, 155, 155);
 }
+.spinner{
+    position: relative;
+    overflow: hidden;
+}
 .status{
     font-size: 1.3rem;
     color: rgb(41, 40, 40);

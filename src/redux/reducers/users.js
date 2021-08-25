@@ -2,6 +2,7 @@ const FOLLOW = "users_follow";
 const UNFOLLOW = "users_unfollow";
 const SELECT_PAGE = 'users_selectPage';
 const SET_SPINNER = 'users_spinner_set';
+const SET_SPINNER_FOLLOW = 'users_spinner_set_follow';
 const SET_USERS = 'SET_USERS';
 
 const initialState = {
@@ -28,6 +29,7 @@ const ac = {
         users: data.items,
         totalUsers: data.totalCount,
     }),
+    setSpinnerFollow: (isFetching, targetID) => ({ type: SET_SPINNER_FOLLOW, isFetching, targetID }),
     setSpinner: (isFetching, page) => ({ type: SET_SPINNER, isFetching, page }),
 }
 export { ac }
@@ -72,6 +74,19 @@ export default function usersReducer(state = initialState, action) {
             return {
                 ...state,
                 spinner: action.isFetching
+            }
+        case SET_SPINNER_FOLLOW:
+            return {
+                ...state,
+                users: state.users.map(a => {
+                    if (a.id === action.targetID) {
+                        return {
+                            ...a,
+                            isFetching: action.isFetching
+                        }
+                    }
+                    return a
+                })
             }
         default:
             return state

@@ -1,3 +1,4 @@
+import usersAPI from '../../api/users';
 const FOLLOW = "users_follow";
 const UNFOLLOW = "users_unfollow";
 const SELECT_PAGE = 'users_selectPage';
@@ -5,13 +6,68 @@ const SET_SPINNER = 'users_spinner_set';
 const SET_SPINNER_FOLLOW = 'users_spinner_set_follow';
 const SET_USERS = 'SET_USERS';
 
+//THUNKS
+export const thunks = {
+    setPageData: {},
+    setPage: ((page) => {
+        console.log(this)
+        this.setPageData.lastPromice = page;
+        return function thunk(dispatch) {
+            dispatch(ac.selectPage(page))
+            dispatch(ac.setSpinner(true))
+            console.log(this.setPageData.lastPromice, page)
+            usersAPI.setPage(page)
+                .then(data => {
+                    if (page === this.setPageData.lastPromice) {
+                        dispatch(ac.setUsers(data))
+                        dispatch(ac.setSpinner(false))
+                    }
+                },
+                    () => {
+                        setTimeout(() => {
+                            if (page === this.setPageData.lastPromice) {
+                                dispatch(this.setPage(page))
+                            }
+                        }, 2000)
+                    })
+        }
+    }).bind(this),
+    follow: (id) => {
+        return (dispatch) => {
+            dispatch(ac.setSpinnerFollow(true, id))
+            usersAPI.follow(id)
+                .then(data => {
+                    if (data.resultCode === 0) {
+                        dispatch(ac.setSpinnerFollow(false, id))
+                        dispatch(ac.follow(id))
+                    }
+                })
+        }
+
+    },
+    unfollow: (id) => {
+        return (dispatch) => {
+            dispatch(ac.setSpinnerFollow(true, id))
+            usersAPI.unfollow(id)
+                .then(data => {
+                    if (data.resultCode === 0) {
+                        dispatch(ac.setSpinnerFollow(false, id))
+                        dispatch(ac.unfollow(id))
+                    }
+                })
+        }
+    }
+}
+
+
 const initialState = {
     users: [],
     currentPage: 1,
     spinner: true,
 };
 
-const ac = {
+//Acction creators object
+export const ac = {
     follow: (targetID) => ({
         type: FOLLOW,
         targetID,
@@ -32,7 +88,9 @@ const ac = {
     setSpinnerFollow: (isFetching, targetID) => ({ type: SET_SPINNER_FOLLOW, isFetching, targetID }),
     setSpinner: (isFetching, page) => ({ type: SET_SPINNER, isFetching, page }),
 }
-export { ac }
+
+//Dispatch reducer to redux store
+
 export default function usersReducer(state = initialState, action) {
     switch (action.type) {
         case FOLLOW:

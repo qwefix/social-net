@@ -1,50 +1,12 @@
 import React from 'react';
 import UsersPureFunc from './UsersPureFunc';
-import usersAPI from '../../api/users';
 
 export default class UsersClass extends React.Component {
-    follow = (id) => {
-        this.props.setSpinnerFollow(true,id)
-        usersAPI.follow(id)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    this.props.setSpinnerFollow(false,id)
-                    this.props.follow(id)
-                }
-            })
-    }
-    unfollow = (id) => {
-        this.props.setSpinnerFollow(true,id)
-        usersAPI.unfollow(id)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    this.props.setSpinnerFollow(false,id)
-                    this.props.unfollow(id)
-                }
-            })
-    }
+
     componentDidMount() {
-        if (!this.props.users.length) this.setPage(1);
-    }
-    setPage = (page) => {
-        this.props.selectPage(page)
-        this.props.setSpinner(true)
-        this.lastPromice = page;
-        usersAPI.setPage(page)
-            .then(data => {
-                if (page === this.lastPromice) {
-                    this.props.setUsers(data)
-                    this.props.setSpinner(false)
-                }
-            },
-                () => {
-                    setTimeout(() => {
-                        if (page === this.lastPromice) {
-                            this.setPage(page)
-                        }
-                    }, 2000)
-                })
-    }
+        console.log(this.props)
+        if (!this.props.users.length) this.props.setPage(1);
+    }   
 
     render() {
         return <UsersPureFunc
@@ -52,10 +14,10 @@ export default class UsersClass extends React.Component {
             users={this.props.users}
             pagination={this.props.pagination}
             currentPage={this.props.currentPage}
-            selectPage={this.setPage}
+            selectPage={this.props.setPage}
             totalPages={this.props.totalPages}
-            unfollow={this.unfollow}
-            follow={this.follow}
+            unfollow={this.props.unfollow}
+            follow={this.props.follow}
         />
     }
 }

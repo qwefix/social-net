@@ -1,9 +1,10 @@
 import dialogReducer from "./reducers/dialogs";
 import profilesReducer from "./reducers/profiles";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import asideReducer from "./reducers/aside";
 import usersReducer from "./reducers/users";
 import authReducer from "./reducers/auth";
+import thunkMiddleware from 'redux-thunk'
 
 const rootReducer = combineReducers({
     dialogs: dialogReducer,
@@ -77,6 +78,6 @@ const initialState = {
     },
 }
 
-let store = createStore(rootReducer, initialState);
+let store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));
 window.store = store
 export default store

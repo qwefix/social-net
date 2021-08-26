@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { ac } from "../../redux/reducers/users";
+import { ac, thunks } from "../../redux/reducers/users";
 import UsersClass from "./UsersClass";
 
 const mapState = (state) => {
@@ -19,5 +19,5 @@ const mapState = (state) => {
     }
 }
 
-const UsersContainer = connect(mapState, ac)(UsersClass)
+const UsersContainer = connect(mapState, {...ac,...thunks})(UsersClass)
 export default UsersContainer

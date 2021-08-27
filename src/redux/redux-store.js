@@ -78,6 +78,6 @@ const initialState = {
     },
 }
 
-let store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));
+const store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));
 window.store = store
 export default store

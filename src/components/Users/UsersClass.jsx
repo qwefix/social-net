@@ -4,7 +4,6 @@ import UsersPureFunc from './UsersPureFunc';
 export default class UsersClass extends React.Component {
 
     componentDidMount() {
-        console.log(this.props)
         if (!this.props.users.length) this.props.setPage(1);
     }   
 

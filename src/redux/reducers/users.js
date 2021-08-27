@@ -1,4 +1,6 @@
 import usersAPI from '../../api/users';
+import store from '../redux-store';
+
 const FOLLOW = "users_follow";
 const UNFOLLOW = "users_unfollow";
 const SELECT_PAGE = 'users_selectPage';
@@ -8,30 +10,26 @@ const SET_USERS = 'SET_USERS';
 
 //THUNKS
 export const thunks = {
-    setPageData: {},
-    setPage: ((page) => {
-        console.log(this)
-        this.setPageData.lastPromice = page;
+    setPage: (page) => {
         return function thunk(dispatch) {
             dispatch(ac.selectPage(page))
             dispatch(ac.setSpinner(true))
-            console.log(this.setPageData.lastPromice, page)
             usersAPI.setPage(page)
                 .then(data => {
-                    if (page === this.setPageData.lastPromice) {
+                    if (page === store.getState().usersPage.currentPage) {
                         dispatch(ac.setUsers(data))
                         dispatch(ac.setSpinner(false))
                     }
                 },
                     () => {
                         setTimeout(() => {
-                            if (page === this.setPageData.lastPromice) {
+                            if (page === store.getState().usersPage.currentPage) {
                                 dispatch(this.setPage(page))
                             }
                         }, 2000)
                     })
         }
-    }).bind(this),
+    },
     follow: (id) => {
         return (dispatch) => {
             dispatch(ac.setSpinnerFollow(true, id))

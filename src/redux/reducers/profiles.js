@@ -1,7 +1,33 @@
+import profileAPI from "../../api/profile";
+import store from "../redux-store";
+
 const NEW_POST_ADD = 'NEW_ADD-POST';
 const NEW_POST_CHANGE = 'NEW_CHANGE-POST';
 const SET_PROFILE = 'SET_PROFILE'
 const SET_SPINNER = 'SET_SPINNER'
+
+export const thunks = {
+    getProfileHeader: (userID) => {
+        return (dispatch) => {
+            console.log(store.getState().profiles)
+            if (!store.getState().profiles.headers[userID]) {
+                dispatch(ac.setSpinner(true))
+                profileAPI.getUser(userID)
+                    .then(data => {
+                        dispatch(ac.setProfile(data))
+                        // if (this.props.targetID === userID)  
+                        dispatch(ac.setSpinner(false))
+                        console.log(store.getState().profiles.headers[userID])
+                    },
+                        () => {
+                            setTimeout(() => {
+                                this.getUser(userID)
+                            }, 2000)
+                        })
+            }
+        }
+    }
+}
 
 export const ac = {
     change: ({ myID, targetID }, value) => ({

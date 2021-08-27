@@ -1,25 +1,9 @@
 import React from 'react';
-import Profile from './Profile'
-import * as axios from 'axios';
+import Profile from './Profile';
 
 class ProfileClass extends React.Component {
     componentDidMount() {
-        this.getUser(this.props.targetID)
-    }
-    getUser = (userID) => {
-        if (!this.props.headers[this.props.targetID]) {
-            this.props.setSpinner(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
-                .then(response => {
-                    this.props.setProfile(response.data)
-                    if (this.props.targetID === userID) { this.props.setSpinner(false) }
-                },
-                    () => {
-                        setTimeout(() => {
-                            this.getUser(userID)
-                        }, 2000)
-                    })
-        }
+        this.props.getProfileHeader(this.props.targetID)
     }
     render() {
         let targetProfile = this.props.headers[this.props.targetID]

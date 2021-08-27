@@ -1,3 +1,5 @@
+import authAPI from "../../api/auth";
+
 const SET_USER_AUTH = 'SET_USER_AUTH';
 const SET_USER_DATA_AUTH = 'SET_USER_DATA_AUTH';
 
@@ -13,10 +15,26 @@ const initialState = {
     isAuth: false,
 };
 
+export const thunks = {
+    autorise: () => {
+        return (dispatch) => {
+            authAPI.autorise()
+                .then(data => {
+                    if (data.resultCode === 0) {
+                        dispatch(ac.setUserAuth(data.data));
+                        authAPI.getUserInfo(data)
+                            .then(data => {
+                                dispatch(ac.setUserData(data))
+                            })
+                    }
+                })
+        }
+    }
+}
+
 export const ac = {
     setUserAuth: (data) => ({ type: SET_USER_AUTH, data }),
     setUserData: (data) => ({ type: SET_USER_DATA_AUTH, data }),
-    // setSpinner: (isFetching, page) => ({ type: SET_SPINNER, isFetching, page }),
 }
 export default function authReducer(state = initialState, action) {
     switch (action.type) {
